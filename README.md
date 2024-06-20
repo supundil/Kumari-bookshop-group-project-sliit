@@ -1,2 +1,2 @@
-# Kumari-bookshop-group-project-sliit
+# Kumari Bookshop Web
 Kumari Bokshop Management System
