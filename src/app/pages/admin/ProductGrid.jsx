@@ -1,11 +1,10 @@
-// ProductGrid.jsx
-
 import React from 'react';
 import ProductCard from './ProductCard';
 import './ProductGrid.css';
+import {Container} from "@material-ui/core";
 
 const ProductGrid = () => {
-    // Dummy product data
+
     const products = [
         { id: 1, image: 'https://via.placeholder.com/300', title: 'Product 1', description: 'Description for product 1.', price: '29.99' },
         { id: 2, image: 'https://via.placeholder.com/300', title: 'Product 2', description: 'Description for product 2.', price: '39.99' },
@@ -18,17 +17,20 @@ const ProductGrid = () => {
     ];
 
     return (
-        <div className="product-grid">
-            {products.map(product => (
-                <ProductCard
-                    key={product.id}
-                    image={product.image}
-                    title={product.title}
-                    description={product.description}
-                    price={product.price}
-                />
-            ))}
-        </div>
+        <Container>
+            <div className="product-grid">
+                {products.map(product => (
+                    <ProductCard
+                        key={product.id}
+                        image={product.image}
+                        title={product.title}
+                        description={product.description}
+                        price={product.price}
+                        id={product.id}
+                    />
+                ))}
+            </div>
+        </Container>
     );
 };
 
