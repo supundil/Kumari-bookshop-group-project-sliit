@@ -1,4 +1,4 @@
-import {Container, Typography,Grid} from "@material-ui/core";
+import {Container, Typography} from "@material-ui/core";
 import './ProductCard.css';
 import ProductGrid from "./ProductGrid";
 
