@@ -6,6 +6,7 @@ import {BrowseItems} from "../pages/customer/BrowseItems";
 import {AdminHome} from "../pages/admin/AdminHome";
 import {Product} from "../pages/admin/Product";
 import ProductGrid from "../pages/admin/ProductGrid";
+import {AddProduct} from "../pages/admin/AddProduct";
 
 export const AppRouter = () => {
 
@@ -20,6 +21,7 @@ export const AppRouter = () => {
                 <Route path="/adm/" element={<AdminHome/>}>
                     <Route index element={<ProductGrid/>}/>
                     <Route path="products/:productId" element={<Product/>}/>
+                    <Route path="addProduct" element={<AddProduct/>}/>
                 </Route>
             </Routes>
         </BrowserRouter>

@@ -40,6 +40,9 @@ export const AdminHome = () => {
             case '/adm/':
                 setValue(0);
                 break;
+            case '/adm/addProduct':
+                setValue(1);
+                break;
             default:
                 setValue(0);
         }
@@ -66,7 +69,11 @@ export const AdminHome = () => {
                         textColor="inherit"
                     >
                         <Tab label="Products" onClick={() => navigate('/adm/')} />
+                        <Tab label="Add Product" onClick={() => navigate('/adm/addProduct')} />
                         <Tab label="Orders" onClick={() => navigate('/adm/')} />
+                        <Tab label="Customers" onClick={() => navigate('/adm/')} />
+                        <Tab label="Employees" onClick={() => navigate('/adm/')} />
+                        <Tab label="Add Employee" onClick={() => navigate('/adm/')} />
                     </Tabs>
                     <div>
                         <IconButton color="inherit" onClick={() => navigate('/')}>
