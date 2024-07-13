@@ -1,4 +1,13 @@
-import {Backdrop, CircularProgress, Container, Divider, MenuItem, TextField, withStyles} from "@material-ui/core";
+import {
+    Backdrop,
+    CircularProgress,
+    Container,
+    Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle,
+    Divider,
+    MenuItem,
+    TextField,
+    withStyles
+} from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
@@ -7,7 +16,7 @@ import styled from "styled-components";
 import {useSnackbar} from "notistack";
 import {backdropStyles, formFieldStyles} from "../../util/CommonStyles";
 import productService from "../../service/ProductService";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import productImg from "../../../asset/img/product-placeholder.png";
 
 const Card = styled.div`
@@ -21,24 +30,32 @@ const Card = styled.div`
 
 const StyledButton = withStyles((theme) => ({
     root: {
-        borderColor: '#fc2c03', // Change this to your desired border color
-        color: '#fc2c03', // Change this to your desired text color
+        borderColor: '#fc2c03',
+        color: '#fc2c03',
         '&:hover': {
-            borderColor: '#fc2c03', // Change this to your desired hover border color
-            backgroundColor: '#FF5935', // Change this to your desired hover background color
-            color: '#ffffff', // Change this to your desired hover text color
+            borderColor: '#fc2c03',
+            backgroundColor: '#FF5935',
+            color: '#ffffff',
         },
     },
 }))(Button);
 
+const DialogButton = withStyles({
+    root: {
+        margin: '5px',
+    },
+})(Button);
+
 export const Product = () => {
 
     const { productId } = useParams();
+    let navigate = useNavigate();
     const {enqueueSnackbar} = useSnackbar();
     const {backdrop} = backdropStyles();
     const {field, imageContainer, uploadButton, submitButtonContainer, updateBtnContainer, updateButton} = formFieldStyles();
 
     const [loading, setLoading] = React.useState(false);
+    const [open, setOpen] = useState(false);
     const [categories, setCategories] = React.useState([]);
     const [formValues, setFormValues] = useState({
         code: '',
@@ -90,6 +107,22 @@ export const Product = () => {
         });
     }
 
+    const deleteProduct = () => {
+        setLoading(true);
+        productService.delete(productId).then((res) => {
+            if (200 === res.status) {
+                setLoading(false);
+                enqueueSnackbar('Successfully deleted', {variant: 'success'});
+                navigate('/adm/');
+            } else {
+                setLoading(false);
+                enqueueSnackbar('Request Failed', {variant: 'error'});
+            }
+        }).catch(() => {
+            setLoading(false);
+            enqueueSnackbar('Internal Server Error', {variant: 'error'});
+        });
+    }
 
     const validateCode = (code) => code !== undefined && code.length >= 3;
 
@@ -110,10 +143,10 @@ export const Product = () => {
         if (!validateCode(formValues.code)) errors.code = 'Must be at least 3 characters.';
         if (!validateName(formValues.name)) errors.name = 'Must be at least 4 characters.';
         if (!validateDesc(formValues.description)) errors.description = 'Must be at least 4 characters.';
-        if (!validateQty(formValues.quantity)) errors.quantity = 'Quantity cannot be 0 or empty';
+        if (!validateQty(formValues.quantity)) errors.quantity = 'Quantity cannot be empty';
         if (!validateCategory(formValues.categoryId)) errors.categoryId = 'Select a category';
-        if (!validateBuying(formValues.buyingPrice)) errors.buyingPrice = 'Buying price cannot be 0 or empty';
-        if (!validateSelling(formValues.sellingPrice)) errors.sellingPrice = 'Selling price cannot be 0 or empty';
+        if (!validateBuying(formValues.buyingPrice)) errors.buyingPrice = 'Buying price cannot be empty';
+        if (!validateSelling(formValues.sellingPrice)) errors.sellingPrice = 'Selling price cannot be empty';
         setFormErrors(errors);
         return Object.keys(errors).length === 0;
     };
@@ -163,6 +196,19 @@ export const Product = () => {
             setProductImageUrl(URL.createObjectURL(e.target.files[0]));
             setProductImage(e.target.files[0]);
         }
+    };
+
+    const handleOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    const handleConfirm = () => {
+        handleClose();
+        deleteProduct();
     };
 
     return (
@@ -313,16 +359,16 @@ export const Product = () => {
                                 <Grid item xs={12} sm={6} className={updateBtnContainer}>
                                     <StyledButton variant="outlined"
                                             color="primary"
-                                            type="submit"
+                                            type="button"
                                             className={updateButton}
-                                            onClick={handleSubmit}>
+                                            onClick={() => handleOpen()}>
                                         Delete
                                     </StyledButton>
                                 </Grid>
                                 <Grid item xs={12} sm={6} className={updateBtnContainer}>
                                     <Button variant="contained"
                                             color="primary"
-                                            type="submit"
+                                            type="button"
                                             className={updateButton}
                                             onClick={handleSubmit}>
                                         Update
@@ -333,6 +379,27 @@ export const Product = () => {
                     </Grid>
                 </form>
             </Card>
+            <Dialog
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">Confirm Deletion</DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        Are you sure you want to delete this product?
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <DialogButton onClick={handleClose} color="primary">
+                        Cancel
+                    </DialogButton>
+                    <DialogButton onClick={handleConfirm} color="secondary" autoFocus>
+                        Delete
+                    </DialogButton>
+                </DialogActions>
+            </Dialog>
         </Container>
     );
 };

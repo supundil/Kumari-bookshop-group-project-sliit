@@ -79,10 +79,10 @@ export const AddProduct = () => {
         if (!validateCode(formValues.code)) errors.code = 'Must be at least 3 characters.';
         if (!validateName(formValues.name)) errors.name = 'Must be at least 4 characters.';
         if (!validateDesc(formValues.description)) errors.description = 'Must be at least 4 characters.';
-        if (!validateQty(formValues.quantity)) errors.quantity = 'Quantity cannot be 0 or empty';
+        if (!validateQty(formValues.quantity)) errors.quantity = 'Quantity cannot empty';
         if (!validateCategory(formValues.categoryId)) errors.categoryId = 'Select a category';
-        if (!validateBuying(formValues.buyingPrice)) errors.buyingPrice = 'Buying price cannot be 0 or empty';
-        if (!validateSelling(formValues.sellingPrice)) errors.sellingPrice = 'Selling price cannot be 0 or empty';
+        if (!validateBuying(formValues.buyingPrice)) errors.buyingPrice = 'Buying price cannot be empty';
+        if (!validateSelling(formValues.sellingPrice)) errors.sellingPrice = 'Selling price cannot be empty';
         setFormErrors(errors);
         return Object.keys(errors).length === 0;
     };
@@ -291,7 +291,7 @@ export const AddProduct = () => {
                             <Grid item xs={12} className={submitButtonContainer}>
                                 <Button variant="contained"
                                         color="primary"
-                                        type="submit"
+                                        type="button"
                                         className={submitButton}
                                         onClick={handleSubmit}>
                                     Submit

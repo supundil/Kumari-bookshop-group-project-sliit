@@ -44,6 +44,14 @@ class ProductService {
         });
     }
 
+    delete = (productId) => {
+        return httpService.deleteOne("product/delete-product/"+productId, {
+            headers: {
+                'require-token': 'true'
+            },
+        });
+    }
+
 }
 
 const productService = new ProductService();
