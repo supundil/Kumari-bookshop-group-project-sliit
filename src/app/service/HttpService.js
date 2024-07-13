@@ -1,5 +1,4 @@
 import axios from "axios";
-import {useNavigate} from 'react-router-dom';
 
 const HttpMethods = {
     GET: 'GET',
@@ -11,14 +10,10 @@ const _axios = axios.create();
 const baseUrl = process.env.REACT_APP_BASE_API_URL;
 const restVersionPath = process.env.REACT_APP_API_VERSION_PATH;
 
-export function useNavigation() {
-    return useNavigate();
-}
-
 function configure (authDto, setAuthDto, window) {
     _axios.interceptors.request.use(function (config) {
-        if (null != authDto.token && 'true' === config.headers.get('require-token')) {
-            config.headers.set("Authorization", `Bearer ${authDto.token}`);
+        if ('true' === config.headers.get('require-token') && null != authDto.token) {
+            config.headers.set("Authorization", `${authDto.token}`);
         }
         return config;
     });
@@ -27,7 +22,7 @@ function configure (authDto, setAuthDto, window) {
         (response) => response,
         async (error) => {
             if (error.response.status === 401 || error.response.status === 403) {
-                useNavigation()('/');
+                window.location = '/';
             }
 
             return Promise.reject(error);
