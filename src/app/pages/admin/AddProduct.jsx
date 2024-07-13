@@ -66,13 +66,13 @@ export const AddProduct = () => {
 
     const validateDesc = (desc) => desc !== undefined && desc.length >= 4;
 
-    const validateQty = (qty) => qty !== undefined && qty > 0;
+    const validateQty = (qty) => qty !== undefined && qty >= 0;
 
     const validateCategory = (category) => category !== undefined && category !== '';
 
-    const validateBuying = (buying) => buying !== undefined && buying > 0;
+    const validateBuying = (buying) => buying !== undefined && buying >= 0;
 
-    const validateSelling = (selling) => selling !== undefined && selling > 0;
+    const validateSelling = (selling) => selling !== undefined && selling >= 0;
 
     const validateForm = () => {
         const errors = {};
@@ -232,7 +232,7 @@ export const AddProduct = () => {
                                         onChange={handleInputChange}
                                         error={!!formErrors.quantity}
                                         helperText={formErrors.quantity}
-                                        InputProps={{ inputProps: { min: 1 } }}
+                                        InputProps={{ inputProps: { min: 0 } }}
                                     />
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
@@ -268,7 +268,7 @@ export const AddProduct = () => {
                                         onChange={handleInputChange}
                                         error={!!formErrors.buyingPrice}
                                         helperText={formErrors.buyingPrice}
-                                        InputProps={{ inputProps: { min: 0.01, step: 0.01 } }}
+                                        InputProps={{ inputProps: { min: 0.00, step: 0.01 } }}
                                     />
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
@@ -284,7 +284,7 @@ export const AddProduct = () => {
                                         onChange={handleInputChange}
                                         error={!!formErrors.sellingPrice}
                                         helperText={formErrors.sellingPrice}
-                                        InputProps={{ inputProps: { min: 0.01, step: 0.01 } }}
+                                        InputProps={{ inputProps: { min: 0.00, step: 0.01 } }}
                                     />
                                 </Grid>
                             </Grid>

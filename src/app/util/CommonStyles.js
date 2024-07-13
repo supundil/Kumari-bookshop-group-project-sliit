@@ -110,6 +110,14 @@ export const formFieldStyles = makeStyles(() => ({
     submitButton: {
         width: '50%',
     },
+    updateButton: {
+        width: '80%',
+    },
+    updateBtnContainer: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
 }));
 
 export const backdropStyles = makeStyles((theme) => ({

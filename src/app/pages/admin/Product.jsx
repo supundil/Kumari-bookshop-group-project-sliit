@@ -23,7 +23,7 @@ export const Product = () => {
     const { productId } = useParams();
     const {enqueueSnackbar} = useSnackbar();
     const {backdrop} = backdropStyles();
-    const {field, imageContainer, uploadButton, submitButtonContainer, submitButton} = formFieldStyles();
+    const {field, imageContainer, uploadButton, submitButtonContainer, updateBtnContainer, updateButton} = formFieldStyles();
 
     const [loading, setLoading] = React.useState(false);
     const [categories, setCategories] = React.useState([]);
@@ -84,13 +84,13 @@ export const Product = () => {
 
     const validateDesc = (desc) => desc !== undefined && desc.length >= 4;
 
-    const validateQty = (qty) => qty !== undefined && qty > 0;
+    const validateQty = (qty) => qty !== undefined && qty >= 0;
 
     const validateCategory = (category) => category !== undefined && category !== '';
 
-    const validateBuying = (buying) => buying !== undefined && buying > 0;
+    const validateBuying = (buying) => buying !== undefined && buying >= 0;
 
-    const validateSelling = (selling) => selling !== undefined && selling > 0;
+    const validateSelling = (selling) => selling !== undefined && selling >= 0;
 
     const validateForm = () => {
         const errors = {};
@@ -239,7 +239,7 @@ export const Product = () => {
                                         onChange={handleInputChange}
                                         error={!!formErrors.quantity}
                                         helperText={formErrors.quantity}
-                                        InputProps={{ inputProps: { min: 1 } }}
+                                        InputProps={{ inputProps: { min: 0 } }}
                                     />
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
@@ -275,7 +275,7 @@ export const Product = () => {
                                         onChange={handleInputChange}
                                         error={!!formErrors.buyingPrice}
                                         helperText={formErrors.buyingPrice}
-                                        InputProps={{ inputProps: { min: 0.01, step: 0.01 } }}
+                                        InputProps={{ inputProps: { min: 0.00, step: 0.01 } }}
                                     />
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
@@ -291,18 +291,29 @@ export const Product = () => {
                                         onChange={handleInputChange}
                                         error={!!formErrors.sellingPrice}
                                         helperText={formErrors.sellingPrice}
-                                        InputProps={{ inputProps: { min: 0.01, step: 0.01 } }}
+                                        InputProps={{ inputProps: { min: 0.00, step: 0.01 } }}
                                     />
                                 </Grid>
                             </Grid>
                             <Grid item xs={12} className={submitButtonContainer}>
-                                <Button variant="contained"
-                                        color="primary"
-                                        type="submit"
-                                        className={submitButton}
-                                        onClick={handleSubmit}>
-                                    Update
-                                </Button>
+                                <Grid item xs={12} sm={6} className={updateBtnContainer}>
+                                    <Button variant="outlined"
+                                            color="primary"
+                                            type="submit"
+                                            className={updateButton}
+                                            onClick={handleSubmit}>
+                                        Delete
+                                    </Button>
+                                </Grid>
+                                <Grid item xs={12} sm={6} className={updateBtnContainer}>
+                                    <Button variant="contained"
+                                            color="primary"
+                                            type="submit"
+                                            className={updateButton}
+                                            onClick={handleSubmit}>
+                                        Update
+                                    </Button>
+                                </Grid>
                             </Grid>
                         </Grid>
                     </Grid>
