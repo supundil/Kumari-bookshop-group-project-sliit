@@ -47,7 +47,7 @@ const ProductGrid = () => {
                         title={product.name}
                         description={product.code}
                         price={product.quantity}
-                        id={product.categoryId}
+                        id={product.productId}
                     />
                 ))}
             </div>

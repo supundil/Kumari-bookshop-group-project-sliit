@@ -27,6 +27,23 @@ class ProductService {
         });
     }
 
+    getProduct = (productId) => {
+        return httpService.get("product/get/"+productId, {
+            headers: {
+                'require-token': 'true'
+            },
+        });
+    }
+
+    update = (formData) => {
+        return httpService.post("product/update", formData, {
+            headers: {
+                'require-token': 'true',
+                'Content-Type': 'multipart/form-data',
+            },
+        });
+    }
+
 }
 
 const productService = new ProductService();
