@@ -66,13 +66,13 @@ export const AddProduct = () => {
 
     const validateDesc = (desc) => desc !== undefined && desc.length >= 4;
 
-    const validateQty = (qty) => qty !== undefined && qty >= 0;
+    const validateQty = (qty) => qty !== undefined && qty !== '' && parseFloat(qty) >= 0;
 
     const validateCategory = (category) => category !== undefined && category !== '';
 
-    const validateBuying = (buying) => buying !== undefined && buying >= 0;
+    const validateBuying = (buying) => buying !== undefined && buying !== '' && parseFloat(buying) >= 0;
 
-    const validateSelling = (selling) => selling !== undefined && selling >= 0;
+    const validateSelling = (selling) => selling !== undefined && selling !== '' && parseFloat(selling) >= 0;
 
     const validateForm = () => {
         const errors = {};

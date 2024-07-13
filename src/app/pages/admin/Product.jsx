@@ -1,4 +1,4 @@
-import {Backdrop, CircularProgress, Container, Divider, MenuItem, TextField} from "@material-ui/core";
+import {Backdrop, CircularProgress, Container, Divider, MenuItem, TextField, withStyles} from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
@@ -8,6 +8,7 @@ import {useSnackbar} from "notistack";
 import {backdropStyles, formFieldStyles} from "../../util/CommonStyles";
 import productService from "../../service/ProductService";
 import {useParams} from "react-router-dom";
+import productImg from "../../../asset/img/product-placeholder.png";
 
 const Card = styled.div`
   max-width: 1200px;
@@ -17,6 +18,18 @@ const Card = styled.div`
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
 `;
+
+const StyledButton = withStyles((theme) => ({
+    root: {
+        borderColor: '#fc2c03', // Change this to your desired border color
+        color: '#fc2c03', // Change this to your desired text color
+        '&:hover': {
+            borderColor: '#fc2c03', // Change this to your desired hover border color
+            backgroundColor: '#FF5935', // Change this to your desired hover background color
+            color: '#ffffff', // Change this to your desired hover text color
+        },
+    },
+}))(Button);
 
 export const Product = () => {
 
@@ -84,13 +97,13 @@ export const Product = () => {
 
     const validateDesc = (desc) => desc !== undefined && desc.length >= 4;
 
-    const validateQty = (qty) => qty !== undefined && qty >= 0;
+    const validateQty = (qty) => qty !== undefined && qty !== '' && parseFloat(qty) >= 0;
 
     const validateCategory = (category) => category !== undefined && category !== '';
 
-    const validateBuying = (buying) => buying !== undefined && buying >= 0;
+    const validateBuying = (buying) => buying !== undefined && buying !== '' && parseFloat(buying) >= 0;
 
-    const validateSelling = (selling) => selling !== undefined && selling >= 0;
+    const validateSelling = (selling) => selling !== undefined && selling !== '' && parseFloat(selling) >= 0;
 
     const validateForm = () => {
         const errors = {};
@@ -127,6 +140,7 @@ export const Product = () => {
             productService.update(formData).then((res) => {
                 if (200 === res.status) {
                     enqueueSnackbar('Successfully Updated', {variant: 'success'});
+                    setFormValues({});
                     setProductImage(null);
                     setProductImageUrl(null);
                     getProduct();
@@ -172,7 +186,7 @@ export const Product = () => {
                                 {productImage ? (
                                     <img src={productImageUrl} alt="Product" style={{ width: '100%' }} />
                                 ) : (
-                                    <img src={`data:image/jpeg;base64,${formValues.imageBase64}`} alt="Placeholder" style={{ width: '100%' }} />
+                                    <img src={formValues.imageBase64 ? `data:image/jpeg;base64,${formValues.imageBase64}` : productImg} alt="Placeholder" style={{ width: '100%' }} />
                                 )}
                                 <Button variant="outlined" component="label" className={uploadButton}>
                                     Upload Image
@@ -297,13 +311,13 @@ export const Product = () => {
                             </Grid>
                             <Grid item xs={12} className={submitButtonContainer}>
                                 <Grid item xs={12} sm={6} className={updateBtnContainer}>
-                                    <Button variant="outlined"
+                                    <StyledButton variant="outlined"
                                             color="primary"
                                             type="submit"
                                             className={updateButton}
                                             onClick={handleSubmit}>
                                         Delete
-                                    </Button>
+                                    </StyledButton>
                                 </Grid>
                                 <Grid item xs={12} sm={6} className={updateBtnContainer}>
                                     <Button variant="contained"
