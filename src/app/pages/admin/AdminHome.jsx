@@ -88,7 +88,7 @@ export const AdminHome = () => {
                         <Tab label="Add Product" onClick={() => navigate('/adm/addProduct')} />
                         <Tab label="Orders" onClick={() => navigate('/adm/')} />
                         <Tab label="Customers" onClick={() => navigate('/adm/')} />
-                        <Tab label="Employees" onClick={() => navigate('/adm/')} />
+                        <Tab label="Employees" onClick={() => navigate('/adm/addEmployee')} />
                         <Tab label="Add Employee" onClick={() => navigate('/adm/')} />
                     </Tabs>
                     <div>

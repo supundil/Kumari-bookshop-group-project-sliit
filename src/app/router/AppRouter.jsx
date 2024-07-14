@@ -7,6 +7,7 @@ import {AdminHome} from "../pages/admin/AdminHome";
 import {Product} from "../pages/admin/Product";
 import ProductGrid from "../pages/admin/ProductGrid";
 import {AddProduct} from "../pages/admin/AddProduct";
+import {AddEmployee} from "../pages/admin/AddEmployee";
 
 export const AppRouter = () => {
 
@@ -22,6 +23,7 @@ export const AppRouter = () => {
                     <Route index element={<ProductGrid/>}/>
                     <Route path="products/:productId" element={<Product/>}/>
                     <Route path="addProduct" element={<AddProduct/>}/>
+                    <Route path="addEmployee" element={<AddEmployee/>}/>
                 </Route>
             </Routes>
         </BrowserRouter>
