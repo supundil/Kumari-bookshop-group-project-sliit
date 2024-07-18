@@ -28,7 +28,7 @@ const Card = styled.div`
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
 `;
 
-const StyledButton = withStyles((theme) => ({
+const StyledButton = withStyles(() => ({
     root: {
         borderColor: '#fc2c03',
         color: '#fc2c03',
@@ -236,7 +236,7 @@ export const Product = () => {
                                 )}
                                 <Button variant="outlined" component="label" className={uploadButton}>
                                     Upload Image
-                                    <input type="file" hidden onChange={handleImageUpload} />
+                                    <input type="file" hidden onChange={handleImageUpload}/>
                                 </Button>
                             </div>
                         </Grid>
