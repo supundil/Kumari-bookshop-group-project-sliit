@@ -3,12 +3,11 @@ import styled from 'styled-components';
 import {Backdrop, CircularProgress, Container, Divider, MenuItem, TextField} from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
-import productImg from "../../../asset/img/product-placeholder.png";
+import employeeDefaultImg from "../../../asset/img/product-placeholder.png";
 import {backdropStyles, formFieldStyles} from "../../util/CommonStyles";
 import Typography from "@material-ui/core/Typography";
 import {useSnackbar} from "notistack";
-import productService from "../../service/ProductService";
-import {useEffect} from "react";
+
 
 const Card = styled.div`
   max-width: 1200px;
@@ -25,64 +24,40 @@ export const AddEmployee = () => {
     const {field, imageContainer, uploadButton, submitButtonContainer, submitButton} = formFieldStyles();
 
     const [loading, setLoading] = React.useState(false);
-    const [categories, setCategories] = React.useState([]);
     const [formValues, setFormValues] = useState({
-        code: '',
         name: '',
-        description: '',
-        buyingPrice: '',
-        sellingPrice: '',
-        quantity: '',
-        categoryId: '',
+        address: '',
+        nic: '',
+        userName: '',
+        password: '',
     });
-    const [productImageUrl, setProductImageUrl] = useState(null);
-    const [productImage, setProductImage] = useState(null);
+    const [employeeImageURL, setEmployeeImageUrlUrl] = useState(null);
+    const [empImage, setEmployeeImageImage] = useState(null);
     const [formErrors, setFormErrors] = useState({});
-
-    useEffect(() => {
-        getCategories();
-    }, [])
-
-    function getCategories() {
-        setLoading(true);
-        productService.getCategories().then((res) => {
-            if (200 === res.status) {
-                setCategories(res.data);
-                console.log("Cate", res);
-                setLoading(false);
-            } else {
-                setLoading(false);
-                enqueueSnackbar('Data Fetching Failed', {variant: 'error'});
-            }
-        }).catch(() => {
-            setLoading(false);
-            enqueueSnackbar('Internal Server Error', {variant: 'error'});
-        });
-    }
-
-    const validateCode = (code) => code !== undefined && code.length >= 3;
 
     const validateName = (name) => name !== undefined && name.length >= 4;
 
-    const validateDesc = (desc) => desc !== undefined && desc.length >= 4;
+    const validateAddress = (address) => address !== undefined && address.length >= 4;
 
-    const validateQty = (qty) => qty !== undefined && qty !== '' && parseFloat(qty) >= 0;
+    const validateNic = (nic) => nic !== undefined && nic !== '';
 
-    const validateCategory = (category) => category !== undefined && category !== '';
+    const validateUserName = (userName) => {
+        const userNamePattern = /^[a-zA-Z0-9]{4,}$/;
+        return userName !== undefined && userNamePattern.test(userName);
+    };
 
-    const validateBuying = (buying) => buying !== undefined && buying !== '' && parseFloat(buying) >= 0;
-
-    const validateSelling = (selling) => selling !== undefined && selling !== '' && parseFloat(selling) >= 0;
+    const validatePassword = (password) => {
+        const passwordPattern = /^(?=.*\d)[a-zA-Z\d]{6,}$/;
+        return password !== undefined && passwordPattern.test(password);
+    };
 
     const validateForm = () => {
         const errors = {};
-        if (!validateCode(formValues.code)) errors.code = 'Must be at least 3 characters.';
         if (!validateName(formValues.name)) errors.name = 'Must be at least 4 characters.';
-        if (!validateDesc(formValues.description)) errors.description = 'Must be at least 4 characters.';
-        if (!validateQty(formValues.quantity)) errors.quantity = 'Quantity cannot empty';
-        if (!validateCategory(formValues.categoryId)) errors.categoryId = 'Select a category';
-        if (!validateBuying(formValues.buyingPrice)) errors.buyingPrice = 'Buying price cannot be empty';
-        if (!validateSelling(formValues.sellingPrice)) errors.sellingPrice = 'Selling price cannot be empty';
+        if (!validateNic(formValues.nic)) errors.nic = 'NIC Cannot Be Empty';
+        if (!validateAddress(formValues.address)) errors.address = 'Must be at least 4 characters.';
+        if (!validateUserName(formValues.userName)) errors.userName = 'Username must be at least 4 characters and contain no special characters';
+        if (!validatePassword(formValues.password)) errors.password = 'Password must be at least 6 characters, contain no special characters, and have at least one number';
         setFormErrors(errors);
         return Object.keys(errors).length === 0;
     };
@@ -99,34 +74,9 @@ export const AddEmployee = () => {
         e.preventDefault();
         setLoading(true);
         if (validateForm()) {
-            if (undefined !== productImage && null != productImage) {
+            if (undefined !== empImageImage && null != empImageImage) {
                 const formData = new FormData();
-                formData.append('file', productImage);
-                formData.append('productDto', JSON.stringify(formValues));
 
-                productService.save(formData).then((res) => {
-                    if (200 === res.status) {
-                        enqueueSnackbar('Successfully Saved', {variant: 'success'});
-                        setFormValues({
-                            code: '',
-                            name: '',
-                            description: '',
-                            buyingPrice: '',
-                            sellingPrice: '',
-                            quantity: '',
-                            categoryId: '',
-                        });
-                        setProductImage(null);
-                        setProductImageUrl(null);
-                        setLoading(false);
-                    } else {
-                        setLoading(false);
-                        enqueueSnackbar('Request Failed', {variant: 'error'});
-                    }
-                }).catch(() => {
-                    setLoading(false);
-                    enqueueSnackbar('Internal Server Error', {variant: 'error'});
-                });
             } else {
                 enqueueSnackbar('Please upload an image', {variant: 'warning'});
                 setLoading(false);
@@ -139,8 +89,8 @@ export const AddEmployee = () => {
     const handleImageUpload = (e) => {
         if (e.target.files.length) {
             console.log("File", e.target.files);
-            setProductImageUrl(URL.createObjectURL(e.target.files[0]));
-            setProductImage(e.target.files[0]);
+            setEmployeeImageUrlUrl(URL.createObjectURL(e.target.files[0]));
+            setEmployeeImageImage(e.target.files[0]);
         }
     };
 
@@ -162,10 +112,10 @@ export const AddEmployee = () => {
                     <Grid container spacing={2}>
                         <Grid item xs={12} md={6} className={imageContainer}>
                             <div>
-                                {productImage ? (
-                                    <img src={productImageUrl} alt="Emplyee" style={{ width: '100%' }} />
+                                {empImage ? (
+                                    <img src={employeeImageURL} alt="Emplyee" style={{ width: '100%' }} />
                                 ) : (
-                                    <img src={productImg} alt="Emplyee" style={{ width: '100%' }} />
+                                    <img src={employeeDefaultImg} alt="Emplyee" style={{ width: '100%' }} />
                                 )}
                                 <Button variant="outlined" component="label" className={uploadButton}>
                                     Upload Emplyee Image
@@ -175,25 +125,12 @@ export const AddEmployee = () => {
                         </Grid>
                         <Grid item xs={12} md={6} >
                             <Grid container spacing={2} style={{height: '60%'}}>
-                                <Grid item xs={12} sm={6}>
-                                    <TextField
-                                        className={field}
-                                        variant="outlined"
-                                        label="Emplyee Id"
-                                        fullWidth
-                                        size="small"
-                                        name="code"
-                                        value={formValues.code}
-                                        onChange={handleInputChange}
-                                        error={!!formErrors.code}
-                                        helperText={formErrors.code}
-                                    />
-                                </Grid>
-                                <Grid item xs={12} sm={6}>
+                                <Grid item xs={12} >
                                     <TextField
                                         className={field}
                                         variant="outlined"
                                         label="Emplyee Full Name"
+                                        rows={2}
                                         fullWidth
                                         size="small"
                                         name="name"
@@ -203,7 +140,7 @@ export const AddEmployee = () => {
                                         helperText={formErrors.name}
                                     />
                                 </Grid>
-                                <Grid item xs={12}>
+                                <Grid item xs={12} >
                                     <TextField
                                         className={field}
                                         variant="outlined"
@@ -213,61 +150,59 @@ export const AddEmployee = () => {
                                         fullWidth
                                         size="small"
                                         name="Address"
-                                        value={formValues.description}
+                                        value={formValues.address}
                                         onChange={handleInputChange}
-                                        error={!!formErrors.description}
-                                        helperText={formErrors.description}
+                                        error={!!formErrors.address}
+                                        helperText={formErrors.address}
                                     />
                                 </Grid>
-                                <Grid item xs={12} sm={6}>
+                                <Grid item xs={12} >
                                     <TextField
                                         className={field}
                                         variant="outlined"
-                                        label="Age"
-                                        type="number"
+                                        label="NIC Number"
+                                        type="text"
                                         fullWidth
                                         size="small"
-                                        name="quantity"
-                                        value={formValues.quantity}
+                                        name="nic"
+                                        value={formValues.nic}
                                         onChange={handleInputChange}
-                                        error={!!formErrors.quantity}
-                                        helperText={formErrors.quantity}
+                                        error={!!formErrors.nic}
+                                        helperText={formErrors.nic}
                                         InputProps={{ inputProps: { min: 0 } }}
                                     />
                                 </Grid>
-                                <Grid item xs={12} sm={6}>
+                                <Grid item xs={12} >
                                     <TextField
                                         className={field}
                                         variant="outlined"
-                                        label="Email Address"
+                                        label="User Name"
                                         type="email"
                                         fullWidth
                                         size="small"
                                         name="quantity"
-                                        value={formValues.quantity}
+                                        value={formValues.userName}
                                         onChange={handleInputChange}
-                                        error={!!formErrors.quantity}
-                                        helperText={formErrors.quantity}
+                                        error={!!formErrors.userName}
+                                        helperText={formErrors.userName}
                                         InputProps={{ inputProps: { min: 0 } }}
                                     />
-                                </Grid>
-                                <Grid item xs={12} sm={6}>
                                     <TextField
                                         className={field}
                                         variant="outlined"
-                                        label="Mobile Number"
-                                        type="number"
+                                        label="Password"
+                                        type="password"
                                         fullWidth
                                         size="small"
                                         name="buyingPrice"
-                                        value={formValues.buyingPrice}
+                                        value={formValues.password}
                                         onChange={handleInputChange}
-                                        error={!!formErrors.buyingPrice}
-                                        helperText={formErrors.buyingPrice}
+                                        error={!!formErrors.password}
+                                        helperText={formErrors.password}
                                         InputProps={{ inputProps: { min: 0.00, step: 0.01 } }}
                                     />
                                 </Grid>
-                            
+
                             </Grid>
                             <Grid item xs={12} className={submitButtonContainer}>
                                 <Button variant="contained"
