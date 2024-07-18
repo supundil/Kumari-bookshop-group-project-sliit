@@ -77,9 +77,52 @@ export const textFieldStyles = makeStyles(() => ({
     },
 }));
 
+export const formFieldStyles = makeStyles(() => ({
+    field: {
+        margin: '10px 0 !important',
+        '& .MuiInputBase-root': {
+            backgroundColor: 'white',
+            borderRadius: 10,
+            // height: 40,
+            // padding: '0 14px',
+        },
+        '& .MuiOutlinedInput-root': {
+            '& fieldset': {
+                border: '2px solid #ccc',
+            },
+            '&.Mui-focused fieldset': {
+                // borderColor: 'yellow', // Border color when focused
+            },
+        },
+    },
+    imageContainer: {
+        textAlign: 'center',
+    },
+    uploadButton: {
+        marginTop: 10,
+    },
+    submitButtonContainer: {
+        display: 'flex',
+        justifyContent: 'flex-end',
+        alignItems: 'flex-end',
+        height: '40%',
+    },
+    submitButton: {
+        width: '50%',
+    },
+    updateButton: {
+        width: '80%',
+    },
+    updateBtnContainer: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+}));
+
 export const backdropStyles = makeStyles((theme) => ({
     backdrop: {
-        zIndex: theme.zIndex.drawer + 1,
+        zIndex: '10000 !important',
         color: '#fff',
     },
 }));

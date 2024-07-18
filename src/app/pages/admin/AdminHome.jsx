@@ -1,5 +1,13 @@
 import React, {useEffect, useState} from 'react';
-import {AppBar, Toolbar, Typography, IconButton, Container, Tab, Tabs} from '@material-ui/core';
+import {
+    AppBar,
+    Toolbar,
+    Typography,
+    IconButton,
+    Container,
+    Tab,
+    Tabs,
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import LogoutIcon from '@material-ui/icons/ExitToApp';
 import logoImg from '../../../asset/img/logo2.png'
@@ -7,7 +15,10 @@ import {Outlet, useLocation, useNavigate} from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
+        position: 'relative !important',
         zIndex: theme.zIndex.drawer + 1,
+        height: '70px',
+        width: '100vw'
     },
     toolbar: {
         display: 'flex',
@@ -22,9 +33,14 @@ const useStyles = makeStyles((theme) => ({
         height: 40,
     },
     content: {
-        marginTop: theme.spacing(8),
-        width: '100vw', // Full screen width
+        // marginTop: theme.spacing(8),
+        marginBottom: theme.spacing(8),
+        width: '100vw',
+        // height: 'calc(100vh - 70px)',// Full screen width
         padding: theme.spacing(3),
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
     },
 }));
 
@@ -40,6 +56,9 @@ export const AdminHome = () => {
             case '/adm/':
                 setValue(0);
                 break;
+            case '/adm/addProduct':
+                setValue(1);
+                break;
             default:
                 setValue(0);
         }
@@ -51,7 +70,7 @@ export const AdminHome = () => {
 
     return (
         <>
-            <AppBar position="fixed" className={appBar}>
+            <AppBar className={appBar}>
                 <Toolbar className={toolbar}>
                     <div className={logoContainer}>
                         <img src={logoImg} alt="Company Logo" className={logo} />
@@ -66,7 +85,11 @@ export const AdminHome = () => {
                         textColor="inherit"
                     >
                         <Tab label="Products" onClick={() => navigate('/adm/')} />
+                        <Tab label="Add Product" onClick={() => navigate('/adm/addProduct')} />
                         <Tab label="Orders" onClick={() => navigate('/adm/')} />
+                        <Tab label="Customers" onClick={() => navigate('/adm/')} />
+                        <Tab label="Employees" onClick={() => navigate('/adm/addEmployee')} />
+                        <Tab label="Add Employee" onClick={() => navigate('/adm/')} />
                     </Tabs>
                     <div>
                         <IconButton color="inherit" onClick={() => navigate('/')}>

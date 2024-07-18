@@ -58,7 +58,6 @@ export default function SignInSide() {
         setLoading(true);
         if (validateForm()) {
             authService.login(formValues).then((res) => {
-                console.log("res", res)
                 if (200 === res.status) {
                     if (res.data.token) {
                         setAuthDto({
@@ -66,7 +65,7 @@ export default function SignInSide() {
                             username: res.data.token,
                             isAdmin: res.data.isAdmin
                         });
-                        if (!res.data.isAdmin) {
+                        if (res.data.isAdmin) {
                             navigate('/adm/');
                         } else {
                             navigate('/cus/');

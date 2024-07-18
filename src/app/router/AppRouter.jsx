@@ -4,7 +4,10 @@ import SignUp from '../pages/SignUp';
 import {CustomerHome} from "../pages/customer/CustomerHome";
 import {BrowseItems} from "../pages/customer/BrowseItems";
 import {AdminHome} from "../pages/admin/AdminHome";
-import {Products} from "../pages/admin/Products";
+import {Product} from "../pages/admin/Product";
+import ProductGrid from "../pages/admin/ProductGrid";
+import {AddProduct} from "../pages/admin/AddProduct";
+import {AddEmployee} from "../pages/admin/AddEmployee";
 
 export const AppRouter = () => {
 
@@ -15,13 +18,12 @@ export const AppRouter = () => {
                 <Route path="/signup" element={<SignUp/>}/>
                 <Route path="/cus/" element={<CustomerHome/>}>
                     <Route index element={<BrowseItems/>}/>
-                    {/*<Route path="profile" element={<Profile/>}/>*/}
-                    {/*<Route path="leaderboard" element={<Leaderboard/>}/>*/}
                 </Route>
                 <Route path="/adm/" element={<AdminHome/>}>
-                    <Route index element={<Products/>}/>
-                    {/*<Route path="profile" element={<Profile/>}/>*/}
-                    {/*<Route path="leaderboard" element={<Leaderboard/>}/>*/}
+                    <Route index element={<ProductGrid/>}/>
+                    <Route path="products/:productId" element={<Product/>}/>
+                    <Route path="addProduct" element={<AddProduct/>}/>
+                    <Route path="addEmployee" element={<AddEmployee/>}/>
                 </Route>
             </Routes>
         </BrowserRouter>

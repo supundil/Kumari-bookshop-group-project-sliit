@@ -1,0 +1,22 @@
+/* ProductGrid.css */
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 cards per row */
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
+    background-color: #F5F8FF;
+}
+
+@media (max-width: 1200px) {
+    .product-grid {
+        grid-template-columns: repeat(3, 1fr); /* 3 cards per row on smaller screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 cards per row on mobile screens */
+    }
+}

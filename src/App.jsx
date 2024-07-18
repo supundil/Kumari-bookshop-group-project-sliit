@@ -15,15 +15,15 @@ function App() {
     }, [authDto]);
 
     return (
-        <React.StrictMode>
-            <div className="App">
+        // <React.StrictMode>
+            <div className="app">
                 <SnackbarProvider anchorOrigin={{ horizontal: 'center', vertical: 'top' }}>
                     <AuthContext.Provider value={{authDto, setAuthDto}}>
                         <AppRouter/>
                     </AuthContext.Provider>
                 </SnackbarProvider>
             </div>
-        </React.StrictMode>
+        // </React.StrictMode>
     );
 }
 
