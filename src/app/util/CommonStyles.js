@@ -200,4 +200,13 @@ export const cartStyles = makeStyles((theme) => ({
         textAlign: 'center',
         marginLeft: theme.spacing(2),
     },
+    emptyCartMessage: {
+        width: '100%',
+        height: '500px',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        color: '#007bff', // Slight blue color
+        fontSize: '1.5em',
+    },
 }));

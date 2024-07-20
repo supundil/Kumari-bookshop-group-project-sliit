@@ -29,7 +29,8 @@ export const Cart = () => {
         itemColumn,
         media,
         quantityControl,
-        list
+        list,
+        emptyCartMessage
     } = cartStyles();
 
     const [loading, setLoading] = useState(false);
@@ -38,7 +39,8 @@ export const Cart = () => {
         orderDetailDtoList: [],
         orderStatus: '',
         productCount: 0,
-        username: ''
+        username: '',
+        totalCost: 0.00
     });
 
     useEffect(() => {
@@ -49,7 +51,9 @@ export const Cart = () => {
         setLoading(true);
         orderService.getCart(authDto.username).then((res) => {
             if (200 === res.status) {
-                setCart(res.data);
+                if (res.data) {
+                    setCart(res.data);
+                }
                 setLoading(false);
             } else {
                 setLoading(false);
@@ -109,79 +113,90 @@ export const Cart = () => {
             <Backdrop className={backdrop} open={loading}>
                 <CircularProgress color="inherit"/>
             </Backdrop>
-            <div className={header}>
-                <Typography variant="h6" className={headerItemAdded}>Added Items</Typography>
-                <Typography variant="h6" className={headerItem}>Price</Typography>
-                <Typography variant="h6" className={headerItem}>Quantity</Typography>
-                <Typography variant="h6" className={headerItem}>Total</Typography>
-            </div>
-            <div className={list}>
-                {cart.orderDetailDtoList.map(({detailId, image, productName, quantity, sellingPrice, totalPrice}) => (
-                    <div key={detailId} className={listItem}>
-                        <div className={itemDetailsContainer}>
-                            <CardMedia
-                                className={media}
-                                image={image || "https://via.placeholder.com/400"}
-                                title={productName}
-                            />
-                            <Typography variant="body1" className={itemDetails}>{productName}</Typography>
-                        </div>
-                        <Typography variant="body1" className={itemColumn}>Rs. {sellingPrice}</Typography>
-                        <div className={`${itemColumn} ${quantityControl}`}>
-                            <IconButton
-                                onClick={() => decreaseItems(detailId)}
-                                disabled={quantity === 1}
-                            >
-                                <RemoveIcon/>
-                            </IconButton>
-                            <Typography variant="body1">{quantity}</Typography>
-                            <IconButton onClick={() => increaseItems(detailId)}>
-                                <AddIcon/>
-                            </IconButton>
-                        </div>
-                        <Typography variant="body1" className={itemColumn}>Rs. {totalPrice}</Typography>
+            {0 === cart.oderId ?
+                <div className={emptyCartMessage}>Cart empty, keep browsing.</div>
+                : <>
+                    <div className={header}>
+                        <Typography variant="h6" className={headerItemAdded}>Added Items</Typography>
+                        <Typography variant="h6" className={headerItem}>Price</Typography>
+                        <Typography variant="h6" className={headerItem}>Quantity</Typography>
+                        <Typography variant="h6" className={headerItem}>Total</Typography>
                     </div>
-                ))}
-            </div>
-            <Grid item xs={12} style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'end',
-                marginTop: '20px'
-            }}>
-                <Grid item xs={12} sm={4}
-                      style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                      }}
-                >
-                    <Typography variant="h6" className={totalLabel}>Total Amount:</Typography>
-                </Grid>
-                <Grid item xs={12} sm={3}
-                      style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                      }}
-                >
-                    <Typography variant="h6" className={totalAmount}>Rs. {10000}</Typography>
-                </Grid>
-            </Grid>
-            <Grid item xs={12} style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'end',
-                marginTop: '30px'
-            }}>
-                <Grid item xs={12} sm={3}
-                      style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                      }}
-                >
-                    <Button variant="contained" color="primary">Place Order</Button>
-                </Grid>
-            </Grid>
+                    <div className={list}>
+                        {cart.orderDetailDtoList.map(({
+                                                          detailId,
+                                                          image,
+                                                          productName,
+                                                          quantity,
+                                                          sellingPrice,
+                                                          totalPrice
+                                                      }) => (
+                            <div key={detailId} className={listItem}>
+                                <div className={itemDetailsContainer}>
+                                    <CardMedia
+                                        className={media}
+                                        image={image || "https://via.placeholder.com/400"}
+                                        title={productName}
+                                    />
+                                    <Typography variant="body1" className={itemDetails}>{productName}</Typography>
+                                </div>
+                                <Typography variant="body1" className={itemColumn}>Rs. {sellingPrice}</Typography>
+                                <div className={`${itemColumn} ${quantityControl}`}>
+                                    <IconButton
+                                        onClick={() => decreaseItems(detailId)}
+                                        disabled={quantity === 1}
+                                    >
+                                        <RemoveIcon/>
+                                    </IconButton>
+                                    <Typography variant="body1">{quantity}</Typography>
+                                    <IconButton onClick={() => increaseItems(detailId)}>
+                                        <AddIcon/>
+                                    </IconButton>
+                                </div>
+                                <Typography variant="body1" className={itemColumn}>Rs. {totalPrice}</Typography>
+                            </div>
+                        ))}
+                    </div>
+                    <Grid item xs={12} style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'end',
+                        marginTop: '20px'
+                    }}>
+                        <Grid item xs={12} sm={4}
+                              style={{
+                                  display: 'flex',
+                                  alignItems: 'center',
+                              }}
+                        >
+                            <Typography variant="h6" className={totalLabel}>Total Amount:</Typography>
+                        </Grid>
+                        <Grid item xs={12} sm={3}
+                              style={{
+                                  display: 'flex',
+                                  alignItems: 'center',
+                              }}
+                        >
+                            <Typography variant="h6" className={totalAmount}>Rs. {cart.totalCost}</Typography>
+                        </Grid>
+                    </Grid>
+                    <Grid item xs={12} style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'end',
+                        marginTop: '30px'
+                    }}>
+                        <Grid item xs={12} sm={3}
+                              style={{
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  justifyContent: 'center',
+                              }}
+                        >
+                            <Button variant="contained" color="primary">Place Order</Button>
+                        </Grid>
+                    </Grid>
+                </>}
         </Container>
     );
 };

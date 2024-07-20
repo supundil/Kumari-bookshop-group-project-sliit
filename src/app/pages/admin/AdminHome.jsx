@@ -64,12 +64,19 @@ export const AdminHome = () => {
                 setValue(4);
                 break;
             default:
-                setValue(0);
+                setValue(false);
         }
     }, [location]);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
+    };
+
+    const logout = () => {
+        sessionStorage.removeItem('accessToken');
+        sessionStorage.removeItem('username');
+        sessionStorage.removeItem('isAdmin');
+        navigate('/')
     };
 
     return (
@@ -96,7 +103,7 @@ export const AdminHome = () => {
                         <Tab label="Add Employee" onClick={() => navigate('/adm/addEmployee')} />
                     </Tabs>
                     <div>
-                        <IconButton color="inherit" onClick={() => navigate('/')}>
+                        <IconButton color="inherit" onClick={logout}>
                             <LogoutIcon />
                         </IconButton>
                     </div>

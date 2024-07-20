@@ -39,13 +39,11 @@ export const CustomerViewAll = () => {
                     // Mapping the response data
                     setRows(res.data.map(customer => ({
                         customer_id: customer.customerId, // Changed from adminId to customerId
-                        created_date: customer.createdDate || "N/A", // Default to "N/A" if null
-                        modified_date: customer.modifiedDate || "N/A", // Default to "N/A" if null
+                        created_date: customer.createdDate || "N/A",// Default to "N/A" if null
                         contact_no: customer.contactNo || "N/A", // Default to "N/A" if null
                         email_address: customer.emailAddress || "N/A", // Default to "N/A" if null
                         name: customer.name || "N/A", // Default to "N/A" if null
                         nic: customer.nic || "N/A", // Default to "N/A" if null
-                        password: customer.password || "N/A", // Default to "N/A" if null
                         user_name: customer.userName || "N/A" // Default to "N/A" if null
                     })));
                     setLoading(false);
@@ -80,12 +78,10 @@ export const CustomerViewAll = () => {
                                     <TableRow>
                                         <TableCell sx={{ fontWeight: 'bold' }}>Customer ID</TableCell>
                                         <TableCell sx={{ fontWeight: 'bold' }}>Created Date</TableCell>
-                                        <TableCell sx={{ fontWeight: 'bold' }}>Modified Date</TableCell>
                                         <TableCell sx={{ fontWeight: 'bold' }}>Contact No</TableCell>
                                         <TableCell sx={{ fontWeight: 'bold' }}>Email Address</TableCell>
                                         <TableCell sx={{ fontWeight: 'bold' }}>Name</TableCell>
                                         <TableCell sx={{ fontWeight: 'bold' }}>NIC</TableCell>
-                                        <TableCell sx={{ fontWeight: 'bold' }}>Password</TableCell>
                                         <TableCell sx={{ fontWeight: 'bold' }}>User Name</TableCell>
                                     </TableRow>
                                 </TableHead>
@@ -94,12 +90,10 @@ export const CustomerViewAll = () => {
                                         <TableRow key={row.customer_id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                                             <TableCell component="th" scope="row">{row.customer_id}</TableCell>
                                             <TableCell>{row.created_date}</TableCell>
-                                            <TableCell>{row.modified_date}</TableCell>
                                             <TableCell>{row.contact_no}</TableCell>
                                             <TableCell>{row.email_address}</TableCell>
                                             <TableCell>{row.name}</TableCell>
                                             <TableCell>{row.nic}</TableCell>
-                                            <TableCell>{row.password}</TableCell>
                                             <TableCell>{row.user_name}</TableCell>
                                         </TableRow>
                                     ))}

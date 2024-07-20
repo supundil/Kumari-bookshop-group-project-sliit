@@ -18,7 +18,7 @@ const CustomerProductCard = ({ image, title, price, qty, id }) => {
     return (
         <div className="customer-product-card">
             <div className="customer-product-img-container">
-                <img src={`data:image/jpeg;base64,${image}`} alt={title} className="customer-product-image" />
+                <img src={image} alt={title} className="customer-product-image" />
             </div>
             <Divider variant="middle" />
             <div className="customer-product-details">

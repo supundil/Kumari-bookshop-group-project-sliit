@@ -18,7 +18,7 @@ const ProductCard = ({ image, title, description, price, id }) => {
     return (
         <div className="product-card">
             <div className="product-img-container">
-                <img src={`data:image/jpeg;base64,${image}`} alt={title} className="product-image" />
+                <img src={image} alt={title} className="product-image" />
             </div>
             <Divider variant="middle" />
             <div className="product-details">

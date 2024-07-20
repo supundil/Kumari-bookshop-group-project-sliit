@@ -48,11 +48,18 @@ const DialogButton = withStyles({
 
 export const Product = () => {
 
-    const { productId } = useParams();
+    const {productId} = useParams();
     let navigate = useNavigate();
     const {enqueueSnackbar} = useSnackbar();
     const {backdrop} = backdropStyles();
-    const {field, imageContainer, uploadButton, submitButtonContainer, updateBtnContainer, updateButton} = formFieldStyles();
+    const {
+        field,
+        imageContainer,
+        uploadButton,
+        submitButtonContainer,
+        updateBtnContainer,
+        updateButton
+    } = formFieldStyles();
 
     const [loading, setLoading] = React.useState(false);
     const [open, setOpen] = useState(false);
@@ -222,7 +229,7 @@ export const Product = () => {
                         <Typography variant="h5">Update Product</Typography>
                     </Grid>
                     <Grid item xs={12} style={{marginBottom: '12px'}}>
-                        <Divider variant="fullWidth" />
+                        <Divider variant="fullWidth"/>
                     </Grid>
                 </Grid>
                 <form>
@@ -230,9 +237,10 @@ export const Product = () => {
                         <Grid item xs={12} md={6} className={imageContainer}>
                             <div>
                                 {productImage ? (
-                                    <img src={productImageUrl} alt="Product" style={{ width: '100%' }} />
+                                    <img src={productImageUrl} alt="Product" style={{width: '100%'}}/>
                                 ) : (
-                                    <img src={formValues.imageBase64 ? `data:image/jpeg;base64,${formValues.imageBase64}` : productImg} alt="Placeholder" style={{ width: '100%' }} />
+                                    <img src={formValues.imageBase64 ? formValues.imageBase64 : productImg}
+                                         alt="Placeholder" style={{width: '100%'}}/>
                                 )}
                                 <Button variant="outlined" component="label" className={uploadButton}>
                                     Upload Image
@@ -240,7 +248,7 @@ export const Product = () => {
                                 </Button>
                             </div>
                         </Grid>
-                        <Grid item xs={12} md={6} >
+                        <Grid item xs={12} md={6}>
                             <Grid container spacing={2} style={{height: '60%'}}>
                                 <Grid item xs={12} sm={6}>
                                     <TextField
@@ -299,7 +307,7 @@ export const Product = () => {
                                         onChange={handleInputChange}
                                         error={!!formErrors.quantity}
                                         helperText={formErrors.quantity}
-                                        InputProps={{ inputProps: { min: 0 } }}
+                                        InputProps={{inputProps: {min: 0}}}
                                     />
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
@@ -317,7 +325,8 @@ export const Product = () => {
                                         select
                                     >
                                         {
-                                            categories.length ? categories.map(category => <MenuItem value={category.value}>{category.label}</MenuItem>)
+                                            categories.length ? categories.map(category => <MenuItem
+                                                    value={category.value}>{category.label}</MenuItem>)
                                                 : <MenuItem value=""><em>None</em></MenuItem>
                                         }
                                     </TextField>
@@ -335,7 +344,7 @@ export const Product = () => {
                                         onChange={handleInputChange}
                                         error={!!formErrors.buyingPrice}
                                         helperText={formErrors.buyingPrice}
-                                        InputProps={{ inputProps: { min: 0.00, step: 0.01 } }}
+                                        InputProps={{inputProps: {min: 0.00, step: 0.01}}}
                                     />
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
@@ -351,17 +360,17 @@ export const Product = () => {
                                         onChange={handleInputChange}
                                         error={!!formErrors.sellingPrice}
                                         helperText={formErrors.sellingPrice}
-                                        InputProps={{ inputProps: { min: 0.00, step: 0.01 } }}
+                                        InputProps={{inputProps: {min: 0.00, step: 0.01}}}
                                     />
                                 </Grid>
                             </Grid>
                             <Grid item xs={12} className={submitButtonContainer}>
                                 <Grid item xs={12} sm={6} className={updateBtnContainer}>
                                     <StyledButton variant="outlined"
-                                            color="primary"
-                                            type="button"
-                                            className={updateButton}
-                                            onClick={() => handleOpen()}>
+                                                  color="primary"
+                                                  type="button"
+                                                  className={updateButton}
+                                                  onClick={() => handleOpen()}>
                                         Delete
                                     </StyledButton>
                                 </Grid>

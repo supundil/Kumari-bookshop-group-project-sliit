@@ -1,16 +1,40 @@
 import httpService from "./HttpService";
 
-class ProductService {
+class OrderService {
 
-    getAllProducts = () => {
-        return httpService.get("product/get-all", {
+    addToCart = (orderDto) => {
+        return httpService.post("order-service/add-to-cart", {
             headers: {
-                'require-token': 'true'
+                'require-token': 'true',
+            },
+        }, orderDto);
+    }
+
+    getCart = (username) => {
+        return httpService.get("order-service/get-cart/"+username, {
+            headers: {
+                'require-token': 'true',
+            },
+        });
+    }
+
+    decreaseProductQuantity = (detailId) => {
+        return httpService.post("order-service/decrease-product-quantity/"+detailId, {
+            headers: {
+                'require-token': 'true',
+            },
+        });
+    }
+
+    increaseProductQuantity = (detailId) => {
+        return httpService.post("order-service/increase-product-quantity/"+detailId, {
+            headers: {
+                'require-token': 'true',
             },
         });
     }
 
 }
 
-const productService = new ProductService();
-export default productService;
+const orderService = new OrderService();
+export default orderService;

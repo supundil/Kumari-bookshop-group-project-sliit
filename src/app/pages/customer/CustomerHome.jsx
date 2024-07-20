@@ -52,12 +52,19 @@ export const CustomerHome = () => {
                 setValue(1);
                 break;
             default:
-                setValue(null);
+                setValue(false);
         }
     }, [location]);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
+    };
+
+    const logout = () => {
+        sessionStorage.removeItem('accessToken');
+        sessionStorage.removeItem('username');
+        sessionStorage.removeItem('isAdmin');
+        navigate('/')
     };
 
     return (
@@ -83,7 +90,7 @@ export const CustomerHome = () => {
                         <IconButton color="inherit" onClick={() => navigate('/cus/cart')}>
                             <CartIcon />
                         </IconButton>
-                        <IconButton color="inherit" onClick={() => navigate('/')}>
+                        <IconButton color="inherit" onClick={logout}>
                             <LogoutIcon />
                         </IconButton>
                     </div>

@@ -4,7 +4,7 @@ import { Backdrop, CircularProgress, Container, Divider, TextField, Grid, Button
 import employeeDefaultImg from '../../../asset/img/2672335.jpg';
 import { backdropStyles, formFieldStyles } from '../../util/CommonStyles';
 import { useSnackbar } from 'notistack';
-import { useLocation } from 'react-router-dom';
+import {useLocation, useNavigate} from 'react-router-dom';
 import employeeService from "../../service/EmployeeService";
 
 const Card = styled.div`
@@ -23,6 +23,7 @@ export const UpdateEmployee = () => {
 
     const location = useLocation();
     const { row } = location.state || {};  // Get the data from the previous screen
+    let navigate = useNavigate();
 
     const [loading, setLoading] = useState(false);
     const [formValues, setFormValues] = useState({
@@ -106,9 +107,17 @@ export const UpdateEmployee = () => {
                     setEmployeeImageImage(null);
                     setEmployeeImageUrlUrl(null);
                     setLoading(false);
+                    navigate('/adm/employee');
                 } else {
                     setLoading(false);
                     enqueueSnackbar('Request Failed', {variant: 'error'});
+                }
+            }).catch((e) => {
+                setLoading(false);
+                if (e?.response?.data?.message) {
+                    enqueueSnackbar(e.response.data.message, {variant: 'error'});
+                } else {
+                    enqueueSnackbar('Internal Server Error', {variant: 'error'});
                 }
             });
         } else {

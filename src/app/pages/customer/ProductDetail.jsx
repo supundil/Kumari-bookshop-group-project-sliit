@@ -272,7 +272,7 @@ const ProductDetail = () => {
             <Main>
                 <ImageSection>
                     <img
-                        src={product.imageBase64 ? `data:image/jpeg;base64,${product.imageBase64}` : "https://via.placeholder.com/400"}
+                        src={product.imageBase64 ? product.imageBase64 : "https://via.placeholder.com/400"}
                         alt="Item"/>
                 </ImageSection>
                 <DetailsSection>

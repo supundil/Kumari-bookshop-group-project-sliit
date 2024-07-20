@@ -131,9 +131,13 @@ export const EmployeeAll = () => {
                 enqueueSnackbar('Data Fetching Failed', { variant: 'error' });
                 setLoading(false);
             }
-        }).catch(() => {
-            enqueueSnackbar('Internal Server Error', { variant: 'error' });
+        }).catch((e) => {
             setLoading(false);
+            if (e?.response?.data?.message) {
+                enqueueSnackbar(e.response.data.message, {variant: 'error'});
+            } else {
+                enqueueSnackbar('Internal Server Error', {variant: 'error'});
+            }
         });
     }
 

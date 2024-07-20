@@ -59,6 +59,7 @@
 .customer-product-title {
     font-size: 1.1rem;
     margin-bottom: 4px;
+    text-align: center;
 }
 
 .customer-product-price {
