@@ -60,11 +60,9 @@ export default function SignInSide() {
             authService.login(formValues).then((res) => {
                 if (200 === res.status) {
                     if (res.data.token) {
-                        setAuthDto({
-                            token: res.data.token,
-                            username: res.data.token,
-                            isAdmin: res.data.isAdmin
-                        });
+                        sessionStorage.setItem('accessToken', res.data.token);
+                        sessionStorage.setItem('username', res.data.username);
+                        sessionStorage.setItem('isAdmin', JSON.stringify(res.data.isAdmin));
                         if (res.data.isAdmin) {
                             navigate('/adm/');
                         } else {

@@ -71,10 +71,8 @@ export const AddEmployee = () => {
         e.preventDefault();
         setLoading(true);
         if (validateForm()) {
-                const formData = new FormData();
-                formData.append('adminDto', JSON.stringify(formValues));
-                console.log(formData)
-                employeeService.save(formData).then((res) => {
+                console.log(formValues)
+                employeeService.save(formValues).then((res) => {
                     if (200 === res.status) {
                         enqueueSnackbar('Successfully Saved', {variant: 'success'});
                         setFormValues({
@@ -90,6 +88,13 @@ export const AddEmployee = () => {
                     } else {
                         setLoading(false);
                         enqueueSnackbar('Request Failed', {variant: 'error'});
+                    }
+                }).catch((e) => {
+                    setLoading(false);
+                    if (e?.response?.data?.message) {
+                        enqueueSnackbar(e.response.data.message, {variant: 'error'});
+                    } else {
+                        enqueueSnackbar('Internal Server Error', {variant: 'error'});
                     }
                 });
         } else {

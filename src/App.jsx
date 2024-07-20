@@ -10,14 +10,21 @@ function App() {
 
     const [authDto, setAuthDto] = useState(initAuthContext);
 
-    useEffect(() => {
-        httpService.configure(authDto, setAuthDto, window);
-    }, [authDto]);
+    const auth = {
+        token: sessionStorage.getItem('accessToken') || '',
+        username: sessionStorage.getItem('username') || '',
+        isAdmin: JSON.parse(sessionStorage.getItem('isAdmin')) || false
+    };
+    httpService.configure(auth, setAuthDto, window);
+
+    useEffect(async () => {
+        setAuthDto(auth);
+    }, []);
 
     return (
         // <React.StrictMode>
             <div className="app">
-                <SnackbarProvider anchorOrigin={{ horizontal: 'center', vertical: 'top' }}>
+                <SnackbarProvider autoHideDuration={2500} anchorOrigin={{ horizontal: 'center', vertical: 'top' }}>
                     <AuthContext.Provider value={{authDto, setAuthDto}}>
                         <AppRouter/>
                     </AuthContext.Provider>

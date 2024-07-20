@@ -3,7 +3,7 @@ import httpService from "./HttpService";
 class CustomerService {
 
     register = (registerDto) => {
-        return httpService.post("customer/save", registerDto);
+        return httpService.post("customer/save", {}, registerDto);
     }
 
     getAllCustomer = () => {

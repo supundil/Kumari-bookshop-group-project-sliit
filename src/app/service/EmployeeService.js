@@ -3,11 +3,11 @@ import httpService from "./HttpService";
 class EmployeeService {
 
     save = (formData) => {
-        return httpService.post("admin/save", formData, {
+        return httpService.post("admin/save", {
             headers: {
                 'require-token': 'true',
             },
-        });
+        }, formData);
     }
 
     getAllEmployee = () => {
@@ -19,11 +19,11 @@ class EmployeeService {
     }
 
     update = (formData) => {
-        return httpService.post("admin/update", formData, {
+        return httpService.post("admin/update-admin", {
             headers: {
                 'require-token': 'true',
             },
-        });
+        }, formData);
     }
 }
 
