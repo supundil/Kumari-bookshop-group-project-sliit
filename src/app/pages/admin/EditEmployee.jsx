@@ -1,27 +1,32 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Backdrop, CircularProgress, Container, Divider, TextField, Grid, Button, Typography } from '@material-ui/core';
 import employeeDefaultImg from '../../../asset/img/2672335.jpg';
 import { backdropStyles, formFieldStyles } from '../../util/CommonStyles';
 import { useSnackbar } from 'notistack';
+import { useLocation } from 'react-router-dom';
 import employeeService from "../../service/EmployeeService";
 
 const Card = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-  background: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
 `;
 
-export const AddEmployee = () => {
+export const UpdateEmployee = () => {
     const { enqueueSnackbar } = useSnackbar();
     const { backdrop } = backdropStyles();
     const { field, imageContainer, uploadButton, submitButtonContainer, submitButton } = formFieldStyles();
 
+    const location = useLocation();
+    const { row } = location.state || {};  // Get the data from the previous screen
+
     const [loading, setLoading] = useState(false);
     const [formValues, setFormValues] = useState({
+        adminId: '',
         name: '',
         address: '',
         nic: '',
@@ -32,17 +37,30 @@ export const AddEmployee = () => {
     const [empImage, setEmployeeImageImage] = useState(null);
     const [formErrors, setFormErrors] = useState({});
 
+    useEffect(() => {
+        if (row) {
+            setFormValues({
+                adminId: row.id,
+                name: row.name,
+                address: row.other[0].address,
+                nic: row.nic,
+                userName: row.other[0].userName,
+                password: '', // Password should be set blank for security reasons
+            });
+            // Set the employee image URL if available
+            if (row.imageURL) {
+                setEmployeeImageUrlUrl(row.imageURL);
+            }
+        }
+    }, [row]);
+
     const validateName = (name) => name !== undefined && name.length >= 4;
-
     const validateAddress = (address) => address !== undefined && address.length >= 4;
-
     const validateNic = (nic) => nic !== undefined && nic !== '';
-
     const validateUserName = (userName) => {
         const userNamePattern = /^[a-zA-Z0-9]{4,}$/;
         return userName !== undefined && userNamePattern.test(userName);
     };
-
     const validatePassword = (password) => {
         const passwordPattern = /^(?=.*\d)[a-zA-Z\d]{6,}$/;
         return password !== undefined && passwordPattern.test(password);
@@ -71,27 +89,28 @@ export const AddEmployee = () => {
         e.preventDefault();
         setLoading(true);
         if (validateForm()) {
-                const formData = new FormData();
-                formData.append('adminDto', JSON.stringify(formValues));
-                console.log(formData)
-                employeeService.save(formData).then((res) => {
-                    if (200 === res.status) {
-                        enqueueSnackbar('Successfully Saved', {variant: 'success'});
-                        setFormValues({
-                            name: '',
-                            address: '',
-                            nic: '',
-                            userName: '',
-                            password: '',
-                        });
-                        setEmployeeImageImage(null);
-                        setEmployeeImageUrlUrl(null);
-                        setLoading(false);
-                    } else {
-                        setLoading(false);
-                        enqueueSnackbar('Request Failed', {variant: 'error'});
-                    }
-                });
+            const formData = new FormData();
+            formData.append('adminDto', JSON.stringify(formValues));
+            console.log(formData)
+            employeeService.update(formData).then((res) => {
+                if (200 === res.status) {
+                    enqueueSnackbar('Successfully Updated', {variant: 'success'});
+                    setFormValues({
+                        adminId: '',
+                        name: '',
+                        address: '',
+                        nic: '',
+                        userName: '',
+                        password: '',
+                    });
+                    setEmployeeImageImage(null);
+                    setEmployeeImageUrlUrl(null);
+                    setLoading(false);
+                } else {
+                    setLoading(false);
+                    enqueueSnackbar('Request Failed', {variant: 'error'});
+                }
+            });
         } else {
             setLoading(false);
         }
@@ -112,7 +131,7 @@ export const AddEmployee = () => {
             <Card>
                 <Grid container spacing={1}>
                     <Grid item xs={12}>
-                        <Typography variant="h5">New Employee</Typography>
+                        <Typography variant="h5">Update Employee</Typography>
                     </Grid>
                     <Grid item xs={12} style={{ marginBottom: '12px' }}>
                         <Divider variant="fullWidth" />

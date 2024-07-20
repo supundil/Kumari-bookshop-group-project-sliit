@@ -11,6 +11,7 @@ import {AddEmployee} from "../pages/admin/AddEmployee";
 import {EmployeeAll} from "../pages/admin/ViewAllEmployee";
 import {CustomerViewAll} from "../pages/admin/CustomerViewAll";
 import {OrderDetail} from "../pages/admin/OrderDetail";
+import {UpdateEmployee} from "../pages/admin/EditEmployee";
 
 export const AppRouter = () => {
 
@@ -30,6 +31,8 @@ export const AppRouter = () => {
                     <Route path="employee" element={<EmployeeAll/>}/>
                     <Route path="customer" element={<CustomerViewAll/>}/>
                     <Route path="order" element={<OrderDetail/>}/>
+                    <Route path="empUpdate" element={<UpdateEmployee/>}/>
+
                 </Route>
             </Routes>
         </BrowserRouter>
