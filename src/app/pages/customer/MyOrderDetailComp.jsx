@@ -14,34 +14,9 @@ import {Backdrop, CircularProgress} from "@material-ui/core";
 import orderService from "../../service/OrderService";
 import {AuthContext} from "../../context/AuthContext";
 
-const TAX_RATE = 0.07;
-
 function ccyFormat(num) {
     return `${num.toFixed(2)}`;
 }
-
-function priceRow(qty, unit) {
-    return qty * unit;
-}
-
-function createRow(desc, qty, unit) {
-    const price = priceRow(qty, unit);
-    return {desc, qty, unit, price};
-}
-
-function subtotal(items) {
-    return items.map(({price}) => price).reduce((sum, i) => sum + i, 0);
-}
-
-const rows = [
-    createRow('Paperclips (Box)', 100, 1.15),
-    createRow('Paper (Case)', 10, 45.99),
-    createRow('Waste Basket', 2, 17.99),
-];
-
-const invoiceSubtotal = subtotal(rows);
-const invoiceTaxes = TAX_RATE * invoiceSubtotal;
-const invoiceTotal = invoiceTaxes + invoiceSubtotal;
 
 export default function MyOrderDetailComp() {
     const {authDto} = useContext(AuthContext);
@@ -92,7 +67,7 @@ export default function MyOrderDetailComp() {
 
     const getOrderList = () => {
         return orderWrapper.map(({orderStatus, createdDate, orderDetailDtoList, totalCost, oderId}) => (
-            <TableContainer component={Paper} key={"cusOrder"+oderId+totalCost}>
+            <Paper variant="outlined" elevation={3}  key={"cusOrder"+oderId+totalCost} style={{marginBottom: '16px'}}>
                 <Table sx={{minWidth: 700}} aria-label="spanning table">
                     <TableBody>
                         <TableRow>
@@ -169,7 +144,7 @@ export default function MyOrderDetailComp() {
                         </TableRow>
                     </TableBody>
                 </Table>
-            </TableContainer>))
+            </Paper>))
     }
 
     return (
