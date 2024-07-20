@@ -62,7 +62,7 @@ export default function SignInSide() {
                     if (res.data.token) {
                         setAuthDto({
                             token: res.data.token,
-                            username: res.data.token,
+                            username: res.data.username,
                             isAdmin: res.data.isAdmin
                         });
                         if (res.data.isAdmin) {

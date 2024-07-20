@@ -17,7 +17,7 @@ function App() {
     return (
         // <React.StrictMode>
             <div className="app">
-                <SnackbarProvider anchorOrigin={{ horizontal: 'center', vertical: 'top' }}>
+                <SnackbarProvider autoHideDuration={2500} anchorOrigin={{ horizontal: 'center', vertical: 'top' }}>
                     <AuthContext.Provider value={{authDto, setAuthDto}}>
                         <AppRouter/>
                     </AuthContext.Provider>

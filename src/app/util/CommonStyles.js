@@ -126,3 +126,78 @@ export const backdropStyles = makeStyles((theme) => ({
         color: '#fff',
     },
 }));
+
+export const cartStyles = makeStyles((theme) => ({
+    root: {
+        maxWidth: 1200,
+        margin: '0 auto',
+        padding: theme.spacing(3),
+        background: '#fff',
+        borderRadius: '10px',
+    },
+    header: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        padding: theme.spacing(2, 0),
+        borderBottom: '1px solid #ccc',
+    },
+    headerItem: {
+        textAlign: 'center',
+        flex: 1,
+    },
+    headerItemAdded: {
+        textAlign: 'center',
+        flex: 2,
+    },
+    list: {
+        marginTop: theme.spacing(2),
+    },
+    listItem: {
+        display: 'flex',
+        alignItems: 'center',
+        padding: theme.spacing(2, 0),
+        borderBottom: '1px solid #ccc',
+    },
+    media: {
+        height: 50,
+        width: 50,
+        objectFit: 'cover',
+        borderRadius: '5px',
+        marginRight: theme.spacing(2),
+    },
+    itemDetailsContainer: {
+        display: 'flex',
+        alignItems: 'center',
+        flex: 2,
+    },
+    itemDetails: {
+        textAlign: 'left',
+    },
+    itemColumn: {
+        flex: 1,
+        textAlign: 'center',
+    },
+    quantityControl: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    total: {
+        marginTop: theme.spacing(2),
+        textAlign: 'right',
+    },
+    totalAmountContainer: {
+        marginTop: theme.spacing(2),
+        display: 'flex',
+        justifyContent: 'flex-end',
+    },
+    totalLabel: {
+        flex: 1,
+        textAlign: 'center',
+    },
+    totalAmount: {
+        flex: 1,
+        textAlign: 'center',
+        marginLeft: theme.spacing(2),
+    },
+}));

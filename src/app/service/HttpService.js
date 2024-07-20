@@ -31,23 +31,23 @@ function configure (authDto, setAuthDto, window) {
 
 }
 
-const get = (path = "",  config) => {
+const get = (path,  config) => {
     let url = baseUrl + restVersionPath + path;
     return _axios.get(url, config);
 }
 
-const put = (path = "", payload, config) => {
+const put = (path, config, payload) => {
     let url = baseUrl + restVersionPath + path;
     return _axios.put(url, payload, config);
 }
 
-const post = (path = "", payload, config) => {
+const post = (path, config, payload) => {
     let url = baseUrl + restVersionPath + path;
     return _axios.post(url, payload, config);
 }
 
 
-const deleteOne = (path = "", config) => {
+const deleteOne = (path, config) => {
     let url = baseUrl + restVersionPath + path;
     return _axios.delete(url, config);
 }

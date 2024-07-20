@@ -8,6 +8,9 @@ import {Product} from "../pages/admin/Product";
 import ProductGrid from "../pages/admin/ProductGrid";
 import {AddProduct} from "../pages/admin/AddProduct";
 import {AddEmployee} from "../pages/admin/AddEmployee";
+import ProductDetail from "../pages/customer/ProductDetail";
+import {MyOrders} from "../pages/customer/MyOrders";
+import {Cart} from "../pages/customer/Cart";
 
 export const AppRouter = () => {
 
@@ -18,6 +21,9 @@ export const AppRouter = () => {
                 <Route path="/signup" element={<SignUp/>}/>
                 <Route path="/cus/" element={<CustomerHome/>}>
                     <Route index element={<BrowseItems/>}/>
+                    <Route path="browse/:productId" element={<ProductDetail/>}/>
+                    <Route path="my-orders" element={<MyOrders/>}/>
+                    <Route path="cart" element={<Cart/>}/>
                 </Route>
                 <Route path="/adm/" element={<AdminHome/>}>
                     <Route index element={<ProductGrid/>}/>

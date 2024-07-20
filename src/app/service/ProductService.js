@@ -3,12 +3,12 @@ import httpService from "./HttpService";
 class ProductService {
 
     save = (formData) => {
-        return httpService.post("product/save", formData, {
+        return httpService.post("product/save", {
             headers: {
                 'require-token': 'true',
                 'Content-Type': 'multipart/form-data',
             },
-        });
+        }, formData);
     }
 
     getCategories = () => {
@@ -36,16 +36,32 @@ class ProductService {
     }
 
     update = (formData) => {
-        return httpService.post("product/update", formData, {
+        return httpService.post("product/update", {
             headers: {
                 'require-token': 'true',
                 'Content-Type': 'multipart/form-data',
             },
-        });
+        }, formData);
     }
 
     delete = (productId) => {
         return httpService.deleteOne("product/delete-product/"+productId, {
+            headers: {
+                'require-token': 'true'
+            },
+        });
+    }
+
+    getAllActiveProducts = () => {
+        return httpService.get("product/get-all-active", {
+            headers: {
+                'require-token': 'true'
+            },
+        });
+    }
+
+    getProductDetail = (productId) => {
+        return httpService.get("product/get-detail/"+productId, {
             headers: {
                 'require-token': 'true'
             },
