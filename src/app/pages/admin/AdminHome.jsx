@@ -1,14 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {
-    AppBar,
-    Toolbar,
-    Typography,
-    IconButton,
-    Container,
-    Tab,
-    Tabs,
-} from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import {AppBar, Container, IconButton, Tab, Tabs, Toolbar, Typography,} from '@material-ui/core';
+import {makeStyles} from '@material-ui/core/styles';
 import LogoutIcon from '@material-ui/icons/ExitToApp';
 import logoImg from '../../../asset/img/logo2.png'
 import {Outlet, useLocation, useNavigate} from 'react-router-dom';
@@ -59,6 +51,18 @@ export const AdminHome = () => {
             case '/adm/addProduct':
                 setValue(1);
                 break;
+            case '/adm/order':
+                setValue(2);
+                break;
+            case '/adm/customer':
+                setValue(3);
+                break;
+            case '/adm/addEmployee':
+                setValue(5);
+                break;
+            case '/adm/employee':
+                setValue(4);
+                break;
             default:
                 setValue(0);
         }
@@ -86,10 +90,10 @@ export const AdminHome = () => {
                     >
                         <Tab label="Products" onClick={() => navigate('/adm/')} />
                         <Tab label="Add Product" onClick={() => navigate('/adm/addProduct')} />
-                        <Tab label="Orders" onClick={() => navigate('/adm/')} />
-                        <Tab label="Customers" onClick={() => navigate('/adm/')} />
-                        <Tab label="Employees" onClick={() => navigate('/adm/addEmployee')} />
-                        <Tab label="Add Employee" onClick={() => navigate('/adm/')} />
+                        <Tab label="Orders" onClick={() => navigate('/adm/order')} />
+                        <Tab label="Customers" onClick={() => navigate('/adm/customer')} />
+                        <Tab label="Employees" onClick={() => navigate('/adm/employee')} />
+                        <Tab label="Add Employee" onClick={() => navigate('/adm/addEmployee')} />
                     </Tabs>
                     <div>
                         <IconButton color="inherit" onClick={() => navigate('/')}>

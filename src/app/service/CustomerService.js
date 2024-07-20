@@ -6,6 +6,13 @@ class CustomerService {
         return httpService.post("customer/save", {}, registerDto);
     }
 
+    getAllCustomer = () => {
+        return httpService.get("customer/getAll", {
+            headers: {
+                'require-token': 'true'
+            },
+        });
+    }
 }
 
 const customerService = new CustomerService();

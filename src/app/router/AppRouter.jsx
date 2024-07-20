@@ -8,6 +8,10 @@ import {Product} from "../pages/admin/Product";
 import ProductGrid from "../pages/admin/ProductGrid";
 import {AddProduct} from "../pages/admin/AddProduct";
 import {AddEmployee} from "../pages/admin/AddEmployee";
+import {EmployeeAll} from "../pages/admin/ViewAllEmployee";
+import {CustomerViewAll} from "../pages/admin/CustomerViewAll";
+import {OrderDetail} from "../pages/admin/OrderDetail";
+import {UpdateEmployee} from "../pages/admin/EditEmployee";
 import ProductDetail from "../pages/customer/ProductDetail";
 import {MyOrders} from "../pages/customer/MyOrders";
 import {Cart} from "../pages/customer/Cart";
@@ -30,6 +34,11 @@ export const AppRouter = () => {
                     <Route path="products/:productId" element={<Product/>}/>
                     <Route path="addProduct" element={<AddProduct/>}/>
                     <Route path="addEmployee" element={<AddEmployee/>}/>
+                    <Route path="employee" element={<EmployeeAll/>}/>
+                    <Route path="customer" element={<CustomerViewAll/>}/>
+                    <Route path="order" element={<OrderDetail/>}/>
+                    <Route path="empUpdate" element={<UpdateEmployee/>}/>
+
                 </Route>
             </Routes>
         </BrowserRouter>
