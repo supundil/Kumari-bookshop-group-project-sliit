@@ -53,6 +53,15 @@ export const Cart = () => {
             if (200 === res.status) {
                 if (res.data) {
                     setCart(res.data);
+                } else {
+                    setCart({
+                        oderId: 0,
+                        orderDetailDtoList: [],
+                        orderStatus: '',
+                        productCount: 0,
+                        username: '',
+                        totalCost: 0.00
+                    });
                 }
                 setLoading(false);
             } else {
@@ -77,7 +86,7 @@ export const Cart = () => {
                 getCart();
             } else {
                 setLoading(false);
-                enqueueSnackbar('Data Fetching Failed', {variant: 'error'});
+                enqueueSnackbar('Request Failed', {variant: 'error'});
             }
         }).catch((e) => {
             setLoading(false);
@@ -90,13 +99,34 @@ export const Cart = () => {
     }
 
     const decreaseItems = (detailId) => {
+        setLoading(true);
         orderService.decreaseProductQuantity(detailId).then((res) => {
             if (200 === res.status) {
                 setLoading(false);
                 getCart();
             } else {
                 setLoading(false);
-                enqueueSnackbar('Data Fetching Failed', {variant: 'error'});
+                enqueueSnackbar('Request Failed', {variant: 'error'});
+            }
+        }).catch((e) => {
+            setLoading(false);
+            if (e?.response?.data?.message) {
+                enqueueSnackbar(e.response.data.message, {variant: 'error'});
+            } else {
+                enqueueSnackbar('Internal Server Error', {variant: 'error'});
+            }
+        });
+    }
+
+    const placeOrder = () => {
+        setLoading(true);
+        orderService.placeOrder(authDto.username).then((res) => {
+            if (200 === res.status) {
+                setLoading(false);
+                getCart();
+            } else {
+                setLoading(false);
+                enqueueSnackbar('Request Failed', {variant: 'error'});
             }
         }).catch((e) => {
             setLoading(false);
@@ -193,7 +223,7 @@ export const Cart = () => {
                                   justifyContent: 'center',
                               }}
                         >
-                            <Button variant="contained" color="primary">Place Order</Button>
+                            <Button variant="contained" color="primary" onClick={placeOrder}>Place Order</Button>
                         </Grid>
                     </Grid>
                 </>}
