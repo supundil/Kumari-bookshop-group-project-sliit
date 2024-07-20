@@ -34,6 +34,22 @@ class OrderService {
         });
     }
 
+    placeOrder = (username) => {
+        return httpService.post("order-service/place-order/"+username, {
+            headers: {
+                'require-token': 'true',
+            },
+        });
+    }
+
+    getAllOrders = (username) => {
+        return httpService.get("order-service/get-all-orders/"+username, {
+            headers: {
+                'require-token': 'true',
+            },
+        });
+    }
+
 }
 
 const orderService = new OrderService();
