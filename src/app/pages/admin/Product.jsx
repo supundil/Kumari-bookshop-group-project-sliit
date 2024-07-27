@@ -325,8 +325,8 @@ export const Product = () => {
                                         select
                                     >
                                         {
-                                            categories.length ? categories.map(category => <MenuItem
-                                                    value={category.value}>{category.label}</MenuItem>)
+                                            categories.length ? categories.map(category =>
+                                                    <MenuItem key={category.value+category.label} value={category.value}>{category.label}</MenuItem>)
                                                 : <MenuItem value=""><em>None</em></MenuItem>
                                         }
                                     </TextField>

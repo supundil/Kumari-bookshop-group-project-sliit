@@ -50,6 +50,62 @@ class OrderService {
         });
     }
 
+    getAllSubmittedOrders = () => {
+        return httpService.get("order-service/get-all-customer-submitted-orders", {
+            headers: {
+                'require-token': 'true',
+            },
+        });
+    }
+
+    getAllConfirmedOrders = () => {
+        return httpService.get("order-service/get-all-confirmed-orders", {
+            headers: {
+                'require-token': 'true',
+            },
+        });
+    }
+
+    getAllPaidOrders = () => {
+        return httpService.get("order-service/get-all-paid-orders", {
+            headers: {
+                'require-token': 'true',
+            },
+        });
+    }
+
+    getAllRejectedOrders = () => {
+        return httpService.get("order-service/get-all-rejected-orders", {
+            headers: {
+                'require-token': 'true',
+            },
+        });
+    }
+
+    confirmCustomerOrder = (orderId) => {
+        return httpService.post("order-service/confirm-customer-order/"+orderId, {
+            headers: {
+                'require-token': 'true',
+            },
+        });
+    }
+
+    rejectCustomerOrder = (orderId) => {
+        return httpService.post("order-service/reject-customer-order/"+orderId, {
+            headers: {
+                'require-token': 'true',
+            },
+        });
+    }
+
+    paidCustomerOrder = (orderId) => {
+        return httpService.post("order-service/paid-customer-order/"+orderId, {
+            headers: {
+                'require-token': 'true',
+            },
+        });
+    }
+
 }
 
 const orderService = new OrderService();

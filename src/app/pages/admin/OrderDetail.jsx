@@ -1,8 +1,11 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
-import {Backdrop, CircularProgress, Container, Divider, Grid, Typography} from "@material-ui/core";
+import {Backdrop, CircularProgress, Container, Divider, Grid, Tab, Tabs, Typography} from "@material-ui/core";
 import {backdropStyles} from "../../util/CommonStyles";
 import OrderTableComp from '../../components/OrderTableComp';
+import Paper from "@mui/material/Paper";
+import orderService from "../../service/OrderService";
+import {useSnackbar} from "notistack";
 
 const Card = styled.div`
     max-width: 1200px;
@@ -15,8 +18,114 @@ const Card = styled.div`
 
 export const OrderDetail = () => {
     const {backdrop} = backdropStyles();
+    const {enqueueSnackbar} = useSnackbar();
 
     const [loading, setLoading] = useState(false);
+    const [value, setValue] = useState(0);
+    const [status, setStatus] = useState('Submitted');
+    const [orderWrapper, setOrderWrapper] = useState([]);
+
+    useEffect(() => {
+        getAllSubmittedOrders();
+    }, [])
+
+    const getAllSubmittedOrders = () => {
+        setLoading(true);
+        orderService.getAllSubmittedOrders().then((res) => {
+            if (200 === res.status) {
+                setOrderWrapper(res.data);
+                setLoading(false);
+            } else {
+                setLoading(false);
+                enqueueSnackbar('Data Fetching Failed', {variant: 'error'});
+            }
+        }).catch((e) => {
+            setLoading(false);
+            if (e?.response?.data?.message) {
+                enqueueSnackbar(e.response.data.message, {variant: 'error'});
+            } else {
+                enqueueSnackbar('Internal Server Error', {variant: 'error'});
+            }
+        });
+    }
+
+    const getAllConfirmedOrders = () => {
+        setLoading(true);
+        orderService.getAllConfirmedOrders().then((res) => {
+            if (200 === res.status) {
+                setOrderWrapper(res.data);
+                setLoading(false);
+            } else {
+                setLoading(false);
+                enqueueSnackbar('Data Fetching Failed', {variant: 'error'});
+            }
+        }).catch((e) => {
+            setLoading(false);
+            if (e?.response?.data?.message) {
+                enqueueSnackbar(e.response.data.message, {variant: 'error'});
+            } else {
+                enqueueSnackbar('Internal Server Error', {variant: 'error'});
+            }
+        });
+    }
+
+    const getAllPaidOrders = () => {
+        setLoading(true);
+        orderService.getAllPaidOrders().then((res) => {
+            if (200 === res.status) {
+                setOrderWrapper(res.data);
+                setLoading(false);
+            } else {
+                setLoading(false);
+                enqueueSnackbar('Data Fetching Failed', {variant: 'error'});
+            }
+        }).catch((e) => {
+            setLoading(false);
+            if (e?.response?.data?.message) {
+                enqueueSnackbar(e.response.data.message, {variant: 'error'});
+            } else {
+                enqueueSnackbar('Internal Server Error', {variant: 'error'});
+            }
+        });
+    }
+
+    const getAllRejectedOrders = () => {
+        setLoading(true);
+        orderService.getAllRejectedOrders().then((res) => {
+            if (200 === res.status) {
+                setOrderWrapper(res.data);
+                setLoading(false);
+            } else {
+                setLoading(false);
+                enqueueSnackbar('Data Fetching Failed', {variant: 'error'});
+            }
+        }).catch((e) => {
+            setLoading(false);
+            if (e?.response?.data?.message) {
+                enqueueSnackbar(e.response.data.message, {variant: 'error'});
+            } else {
+                enqueueSnackbar('Internal Server Error', {variant: 'error'});
+            }
+        });
+    }
+
+    const handleChange = (newValue) => {
+        const index = parseInt(newValue);
+        if (0 === index) {
+            getAllSubmittedOrders();
+            setStatus('Submitted');
+        } else if (1 === index) {
+            getAllConfirmedOrders();
+            setStatus('Confirmed');
+        } else if (2 === index) {
+            getAllPaidOrders();
+            setStatus('Paid');
+        } else if (3 === index) {
+            getAllRejectedOrders();
+            setStatus('Rejected');
+        }
+        setValue(index);
+    }
 
     return (<Container>
         <Backdrop className={backdrop} open={loading}>
@@ -24,14 +133,33 @@ export const OrderDetail = () => {
         </Backdrop>
         <Card>
             <Grid container spacing={1}>
-                <Grid item xs={12}>
-                    <Typography variant="h5">Order Detail</Typography>
+
+                <Grid item xs={12} style={{marginBottom: '12px', display: 'flex', justifyContent: 'center' }}>
+                    <Paper square elevation={2} style={{backgroundColor: '#F5F7FA'}}>
+                        <Tabs
+                            value={value}
+                            onChange={(event, value) => handleChange(value)}
+                            indicatorColor="primary"
+                            textColor="inherit"
+                            centered
+                        >
+                            <Tab label="Submitted" style={{color: '#373738', fontWeight: 'bold'}}/>
+                            <Tab label="Confirmed" style={{color: '#373738', fontWeight: 'bold'}}/>
+                            <Tab label="Paid" style={{color: '#373738', fontWeight: 'bold'}}/>
+                            <Tab label="Rejected" style={{color: '#373738', fontWeight: 'bold'}}/>
+                        </Tabs>
+                    </Paper>
                 </Grid>
                 <Grid item xs={12} style={{marginBottom: '12px'}}>
                     <Divider variant="fullWidth"/>
                 </Grid>
                 <Grid item xs={12}>
-                    <OrderTableComp/>
+                    <OrderTableComp
+                        orderList={orderWrapper}
+                        status={status}
+                        setLoading={setLoading}
+                        getAllConfirmedOrders={getAllConfirmedOrders}
+                        getAllSubmittedOrders={getAllSubmittedOrders}/>
                 </Grid>
             </Grid>
         </Card>
