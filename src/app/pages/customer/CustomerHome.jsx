@@ -5,6 +5,7 @@ import CartIcon from '@material-ui/icons/ShoppingCart';
 import LogoutIcon from '@material-ui/icons/ExitToApp';
 import logoImg from '../../../asset/img/logo2.png'
 import {Outlet, useLocation, useNavigate} from 'react-router-dom';
+import httpService from "../../service/HttpService";
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -64,6 +65,7 @@ export const CustomerHome = () => {
         sessionStorage.removeItem('accessToken');
         sessionStorage.removeItem('username');
         sessionStorage.removeItem('isAdmin');
+        httpService.getAxiosClient().interceptors.request.clear();
         navigate('/')
     };
 

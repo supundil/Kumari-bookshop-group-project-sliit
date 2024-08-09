@@ -342,8 +342,8 @@ const ProductDetail = () => {
                 </CollapsibleTitle>
                 {isOpen.details && (
                     <CollapsibleContent>
-                        <p>After placing the order, our employees will review your order and confirm. You will receive
-                            an email with the order bill. Provide this order bill when picking up your order.</p>
+                        <p>After placing the order, our employees will review your order and confirm. You can download
+                            the bill after confirmation from the order section. Provide this order bill when picking up your order.</p>
                     </CollapsibleContent>
                 )}
             </CollapsibleSection>

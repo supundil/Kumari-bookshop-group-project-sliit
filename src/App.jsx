@@ -10,16 +10,9 @@ function App() {
 
     const [authDto, setAuthDto] = useState(initAuthContext);
 
-    const auth = {
-        token: sessionStorage.getItem('accessToken') || '',
-        username: sessionStorage.getItem('username') || '',
-        isAdmin: JSON.parse(sessionStorage.getItem('isAdmin')) || false
-    };
-    httpService.configure(auth, setAuthDto, window);
-
     useEffect(async () => {
-        setAuthDto(auth);
-    }, []);
+        httpService.configure(authDto, setAuthDto, window);
+    }, [authDto]);
 
     return (
         // <React.StrictMode>

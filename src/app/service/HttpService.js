@@ -13,6 +13,7 @@ const restVersionPath = process.env.REACT_APP_API_VERSION_PATH;
 function configure (authDto, setAuthDto, window) {
     _axios.interceptors.request.use(function (config) {
         if ('true' === config.headers.get('require-token') && null != authDto.token) {
+            console.log("token", authDto.token);
             config.headers.set("Authorization", `${authDto.token}`);
         }
         return config;

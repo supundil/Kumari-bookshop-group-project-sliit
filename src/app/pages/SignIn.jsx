@@ -16,6 +16,7 @@ import {Visibility, VisibilityOff} from "@material-ui/icons";
 import {useSnackbar} from "notistack";
 import authService from "../service/auth/AuthService";
 import {AuthContext} from "../context/AuthContext";
+import httpService from "../service/HttpService";
 
 export default function SignInSide() {
     let navigate = useNavigate();
@@ -63,6 +64,13 @@ export default function SignInSide() {
                         sessionStorage.setItem('accessToken', res.data.token);
                         sessionStorage.setItem('username', res.data.username);
                         sessionStorage.setItem('isAdmin', JSON.stringify(res.data.isAdmin));
+                        const auth = {
+                            token: res.data.token,
+                            username: res.data.username,
+                            isAdmin: JSON.parse(res.data.isAdmin) || false
+                        };
+                        setAuthDto(auth);
+                        httpService.configure(auth, setAuthDto, window);
                         if (res.data.isAdmin) {
                             navigate('/adm/');
                         } else {

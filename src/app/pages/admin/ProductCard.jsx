@@ -35,8 +35,8 @@ ProductCard.propTypes = {
     image: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
-    price: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    id: PropTypes.number.isRequired,
 };
 
 export default ProductCard;
