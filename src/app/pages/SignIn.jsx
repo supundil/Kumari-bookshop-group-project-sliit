@@ -70,7 +70,7 @@ export default function SignInSide() {
                             isAdmin: JSON.parse(res.data.isAdmin) || false
                         };
                         setAuthDto(auth);
-                        httpService.configure(auth, setAuthDto, window);
+                        httpService.configure(auth, window);
                         if (res.data.isAdmin) {
                             navigate('/adm/');
                         } else {

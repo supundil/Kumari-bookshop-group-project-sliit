@@ -10,10 +10,10 @@ const _axios = axios.create();
 const baseUrl = process.env.REACT_APP_BASE_API_URL;
 const restVersionPath = process.env.REACT_APP_API_VERSION_PATH;
 
-function configure (authDto, setAuthDto, window) {
+function configure (authDto, window) {
+    _axios.interceptors.request.clear();
     _axios.interceptors.request.use(function (config) {
         if ('true' === config.headers.get('require-token') && null != authDto.token) {
-            console.log("token", authDto.token);
             config.headers.set("Authorization", `${authDto.token}`);
         }
         return config;

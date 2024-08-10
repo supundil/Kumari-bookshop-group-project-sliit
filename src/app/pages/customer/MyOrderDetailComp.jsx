@@ -2,7 +2,6 @@ import React, {useContext, useEffect, useState} from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {Chip} from "@mui/material";
@@ -109,16 +108,16 @@ export default function MyOrderDetailComp() {
 
     const getOrderList = () => {
         return orderWrapper.map(({orderStatus, createdDate, orderDetailDtoList, totalCost, oderId}) => (
-            <Paper variant="outlined" elevation={3}  key={"cusOrder"+oderId+totalCost} style={{marginBottom: '16px'}}>
+            <Paper variant="outlined" key={"cusOrder"+oderId+totalCost} style={{marginBottom: '16px'}}>
                 <Table sx={{minWidth: 700}} aria-label="spanning table">
                     <TableBody>
                         <TableRow>
                             <TableCell align="left" style={{display: 'flex', flexDirection: 'row'}}>
-                                <Grid alignItems={"center"} justifyContent={"center"}>
+                                <Grid >
                                     <Typography variant="overline" style={{fontSize: '14px', fontWeight: 'bold'}}>Order
                                         Status : </Typography>
                                 </Grid>
-                                <Grid alignItems={"center"} justifyContent={"center"} style={{display: 'flex'}}>
+                                <Grid style={{display: 'flex'}}>
                                     <Chip label={orderStatus} style={{
                                         backgroundColor: getChipColor(orderStatus),
                                         color: '#ffffff',
@@ -128,7 +127,7 @@ export default function MyOrderDetailComp() {
                                 </Grid>
                             </TableCell>
                             <TableCell align="left" style={{display: 'flex', flexDirection: 'row'}}>
-                                <Grid alignItems={"center"} justifyContent={"center"}>
+                                <Grid>
                                     <Typography variant="overline" style={{fontSize: '14px', fontWeight: 'bold'}}>Order
                                         placed on : </Typography>
                                 </Grid>
@@ -187,16 +186,16 @@ export default function MyOrderDetailComp() {
                     </TableBody>
                 </Table>
                 <Grid xs={12} style={{display: 'flex', flexDirection: 'row', padding: '12px 12px 8px 12px'}}>
-                    <Grid xs={3} alignItems={"center"} justifyContent={"center"}
+                    <Grid xs={3}
                           style={{textAlign: 'end', paddingRight: '12px'}}>
                     </Grid>
-                    <Grid xs={3} alignItems={"center"} justifyContent={"flex-start"} style={{display: 'flex'}}>
+                    <Grid xs={3} style={{display: 'flex'}}>
                     </Grid>
-                    <Grid xs={3} alignItems={"center"} justifyContent={"center"}
+                    <Grid xs={3}
                           style={{textAlign: 'end', paddingRight: '12px'}}>
 
                     </Grid>
-                    <Grid xs={3} alignItems={"center"} justifyContent={"flex-start"} style={{display: 'flex'}}>
+                    <Grid xs={3}  style={{display: 'flex'}}>
                         <Button variant="contained"
                                 color="primary"
                                 type="button"

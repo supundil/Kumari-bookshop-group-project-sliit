@@ -118,7 +118,7 @@ const OrderTableComp = ({orderList, status, setLoading, getAllSubmittedOrders, g
 
     const getOrderList = () => {
         return orderList.map(({createdDate, orderStatus, orderDetailDtoList, totalCost, oderId, username}) => (
-            <Paper variant="outlined" elevation={3} key={"cusOrder" + oderId + totalCost}
+            <Paper variant="outlined" key={"cusOrder" + oderId + totalCost}
                    style={{marginBottom: '16px'}}>
                 <Grid xs={12} style={{display: 'flex', flexDirection: 'row', padding: '12px 12px 8px 12px'}}>
                     <Grid xs={3} alignItems={"center"} justifyContent={"center"}
@@ -264,7 +264,7 @@ const OrderTableComp = ({orderList, status, setLoading, getAllSubmittedOrders, g
 }
 
 OrderTableComp.propTypes = {
-    orderList: PropTypes.object.isRequired,
+    orderList: PropTypes.array.isRequired,
     status: PropTypes.string.isRequired,
     setLoading: PropTypes.func.isRequired,
     getAllSubmittedOrders: PropTypes.func.isRequired,

@@ -209,7 +209,7 @@ export const AddProduct = () => {
                                         variant="outlined"
                                         label="Product Description"
                                         multiline
-                                        rows={4}
+                                        minRows={4}
                                         fullWidth
                                         size="small"
                                         name="description"
@@ -250,7 +250,7 @@ export const AddProduct = () => {
                                         select
                                     >
                                         {
-                                            categories.length ? categories.map(category => <MenuItem value={category.value}>{category.label}</MenuItem>)
+                                            categories.length ? categories.map(category => <MenuItem key={category.value+category.label} value={category.value}>{category.label}</MenuItem>)
                                                 : <MenuItem value=""><em>None</em></MenuItem>
                                         }
                                     </TextField>

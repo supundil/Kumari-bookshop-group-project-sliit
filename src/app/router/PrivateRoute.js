@@ -1,25 +1,32 @@
-import {Navigate, Route,} from 'react-router-dom';
+import {Navigate} from 'react-router-dom';
 import React, {useContext} from "react";
 import {AuthContext} from "../context/AuthContext";
+import {Backdrop, CircularProgress} from "@material-ui/core";
+import {backdropStyles} from "../util/CommonStyles";
 
-export function PrivateRoute( {component:Component, isAdminRoute, ...rest} ) {
+export function PrivateRoute( { children, isAdminRoute, ...rest } ) {
 
     const {authDto} = useContext(AuthContext);
+    const {backdrop} = backdropStyles();
 
-    const isAuthorized = () => {
-        return isAdminRoute ? authDto.isAdmin : authDto.isCustomer;
+    if (!authDto) {
+        return (
+            <Backdrop className={backdrop} open={true}>
+                <CircularProgress color="inherit" />
+            </Backdrop>
+        );
     }
 
-    return (
-        <Route
-            {...rest}
-            render={props => {
-                return isAuthorized()
-                    ? <Component {...props} />
-                    : <Navigate replace to="/"/>
-            }}
-        />
-    )
-}
+    const isAuthorized = authDto.username !== '';
+    const isValidRoute = isAdminRoute ? authDto.isAdmin : true;
 
-export default PrivateRoute;
+    if (!isAuthorized) {
+        return <Navigate to="/" replace />;
+    }
+
+    if (!isValidRoute) {
+        return <Navigate to="/" replace />;
+    }
+
+    return children;
+}

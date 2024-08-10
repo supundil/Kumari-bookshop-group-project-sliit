@@ -1,7 +1,7 @@
 import {createContext} from "react";
 
 const initAuthContext = {
-    token: null,
+    token: "",
     username: "",
     isAdmin: false,
 }

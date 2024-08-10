@@ -284,7 +284,7 @@ export const Product = () => {
                                         variant="outlined"
                                         label="Product Description"
                                         multiline
-                                        rows={4}
+                                        minRows={6}
                                         fullWidth
                                         size="small"
                                         name="description"
