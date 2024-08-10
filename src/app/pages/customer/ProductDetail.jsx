@@ -179,7 +179,6 @@ const ProductDetail = () => {
         productService.getProductDetail(productId).then((res) => {
             if (200 === res.status) {
                 setProduct(res.data);
-                console.log("Product", res);
                 setLoading(false);
             } else {
                 setLoading(false);
@@ -228,8 +227,12 @@ const ProductDetail = () => {
 
     const handleOpen = () => {
         if (undefined !== formValues.quantity && '' !== formValues.quantity
-            && 0 < parseInt(formValues.quantity) && parseInt(formValues.quantity) <= product.quantity) {
-            setOpenDialog(true);
+            && 0 < parseInt(formValues.quantity)) {
+            if (parseInt(formValues.quantity) <= product.quantity) {
+                setOpenDialog(true);
+            } else {
+                enqueueSnackbar('Insufficient Stock', {variant: 'warning'});
+            }
         } else {
             enqueueSnackbar('Please enter a valid quantity', {variant: 'warning'});
         }
