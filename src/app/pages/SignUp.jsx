@@ -231,7 +231,7 @@ export default function SignUp() {
                                         className={submit}
                                         onClick={handleSubmit}
                                 >
-                                    Sign Up
+                                    Sign UP
                                 </Button>
                             </div>
                             <Link onClick={() => navigate('/')} variant="body2"

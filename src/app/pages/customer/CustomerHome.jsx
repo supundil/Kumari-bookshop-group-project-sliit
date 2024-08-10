@@ -84,10 +84,10 @@ export const CustomerHome = () => {
                         textColor="inherit"
                     >
                         <Tab label="Browse" onClick={() => navigate('/cus/')} />
-                        <Tab label="My Orders" onClick={() => navigate('/cus/my-orders')} />
+                        <Tab id={"MyOrders"} label="My Orders" onClick={() => navigate('/cus/my-orders')} />
                     </Tabs>
                     <div>
-                        <IconButton color="inherit" onClick={() => navigate('/cus/cart')}>
+                        <IconButton color="inherit" id={'cart'}  onClick={() => navigate('/cus/cart')}>
                             <CartIcon />
                         </IconButton>
                         <IconButton color="inherit" onClick={logout}>

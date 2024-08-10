@@ -24,6 +24,7 @@
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
+    "cypress": "^13.13.2",
     "prettier": "^3.3.2"
   },
   "scripts": {

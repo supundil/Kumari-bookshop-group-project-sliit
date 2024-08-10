@@ -312,6 +312,7 @@ export const Product = () => {
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
                                     <TextField
+                                        id={"categorySelect"}
                                         className={field}
                                         variant="outlined"
                                         label="Category"
@@ -366,7 +367,9 @@ export const Product = () => {
                             </Grid>
                             <Grid item xs={12} className={submitButtonContainer}>
                                 <Grid item xs={12} sm={6} className={updateBtnContainer}>
-                                    <StyledButton variant="outlined"
+                                    <StyledButton
+                                        id={"DeleteProduct"}
+                                        variant="outlined"
                                                   color="primary"
                                                   type="button"
                                                   className={updateButton}
@@ -375,7 +378,9 @@ export const Product = () => {
                                     </StyledButton>
                                 </Grid>
                                 <Grid item xs={12} sm={6} className={updateBtnContainer}>
-                                    <Button variant="contained"
+                                    <Button
+                                        id={"updateProduct"}
+                                        variant="contained"
                                             color="primary"
                                             type="button"
                                             className={updateButton}
@@ -404,7 +409,7 @@ export const Product = () => {
                     <DialogButton onClick={handleClose} color="primary">
                         Cancel
                     </DialogButton>
-                    <DialogButton onClick={handleConfirm} color="secondary" autoFocus>
+                    <DialogButton id={"DeleteModalOk"} onClick={handleConfirm} color="secondary" autoFocus>
                         Delete
                     </DialogButton>
                 </DialogActions>

@@ -96,7 +96,7 @@ export const AdminHome = () => {
                         textColor="inherit"
                     >
                         <Tab label="Products" onClick={() => navigate('/adm/')} />
-                        <Tab label="Add Product" onClick={() => navigate('/adm/addProduct')} />
+                        <Tab id={"addProduct"} label="Add Product" onClick={() => navigate('/adm/addProduct')} />
                         <Tab label="Orders" onClick={() => navigate('/adm/order')} />
                         <Tab label="Customers" onClick={() => navigate('/adm/customer')} />
                         <Tab label="Employees" onClick={() => navigate('/adm/employee')} />

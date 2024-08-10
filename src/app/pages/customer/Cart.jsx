@@ -172,14 +172,14 @@ export const Cart = () => {
                                 </div>
                                 <Typography variant="body1" className={itemColumn}>Rs. {sellingPrice}</Typography>
                                 <div className={`${itemColumn} ${quantityControl}`}>
-                                    <IconButton
+                                    <IconButton id={'decreaseItems'}
                                         onClick={() => decreaseItems(detailId)}
                                         disabled={quantity === 1}
                                     >
                                         <RemoveIcon/>
                                     </IconButton>
                                     <Typography variant="body1">{quantity}</Typography>
-                                    <IconButton onClick={() => increaseItems(detailId)}>
+                                    <IconButton id={'increaseItems'} onClick={() => increaseItems(detailId)}>
                                         <AddIcon/>
                                     </IconButton>
                                 </div>
@@ -223,7 +223,7 @@ export const Cart = () => {
                                   justifyContent: 'center',
                               }}
                         >
-                            <Button variant="contained" color="primary" onClick={placeOrder}>Place Order</Button>
+                            <Button id={"placeOrder"} variant="contained" color="primary" onClick={placeOrder}>Place Order</Button>
                         </Grid>
                     </Grid>
                 </>}

@@ -237,6 +237,7 @@ export const AddProduct = () => {
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
                                     <TextField
+                                        id={"category"}
                                         className={field}
                                         variant="outlined"
                                         label="Category"
@@ -289,7 +290,9 @@ export const AddProduct = () => {
                                 </Grid>
                             </Grid>
                             <Grid item xs={12} className={submitButtonContainer}>
-                                <Button variant="contained"
+                                <Button
+                                    id={"addProductSubmit"}
+                                    variant="contained"
                                         color="primary"
                                         type="button"
                                         className={submitButton}

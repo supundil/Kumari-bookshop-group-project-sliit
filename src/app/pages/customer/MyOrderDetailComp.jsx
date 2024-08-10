@@ -196,7 +196,7 @@ export default function MyOrderDetailComp() {
 
                     </Grid>
                     <Grid xs={3}  style={{display: 'flex'}}>
-                        <Button variant="contained"
+                        <Button id={"downloadBill"} variant="contained"
                                 color="primary"
                                 type="button"
                                 style={{backgroundColor: '#03c2fc'}}
