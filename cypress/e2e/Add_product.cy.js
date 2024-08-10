@@ -19,6 +19,12 @@ describe('Admin Product Details Update', () => {
         cy.get('input[name="buyingPrice"]').type('admin123')
         cy.get('input[name="sellingPrice"]').type('admin123')
 
+        cy.get('input[type="file"]').then(input => {
+            input.removeAttr('hidden');
+        });
+
+        cy.get('input[type=file]').selectFile('10182533-700x840.jpg');
+
         cy.wait(1000)
 
         cy.get('#addProductSubmit').click()
