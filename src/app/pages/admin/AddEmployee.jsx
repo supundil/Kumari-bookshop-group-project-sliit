@@ -149,6 +149,7 @@ export const AddEmployee = () => {
                                         onChange={handleInputChange}
                                         error={!!formErrors.name}
                                         helperText={formErrors.name}
+                                        id={"txtEmpName"}
                                     />
                                 </Grid>
                                 <Grid item xs={12}>
@@ -164,6 +165,7 @@ export const AddEmployee = () => {
                                         onChange={handleInputChange}
                                         error={!!formErrors.address}
                                         helperText={formErrors.address}
+                                        id={"txtEmpAddress"}
                                     />
                                 </Grid>
                                 <Grid item xs={12}>
@@ -180,6 +182,7 @@ export const AddEmployee = () => {
                                         error={!!formErrors.nic}
                                         helperText={formErrors.nic}
                                         InputProps={{ inputProps: { min: 0 } }}
+                                        id={"txtEmpNIC"}
                                     />
                                 </Grid>
                                 <Grid item xs={12}>
@@ -196,6 +199,7 @@ export const AddEmployee = () => {
                                         error={!!formErrors.userName}
                                         helperText={formErrors.userName}
                                         InputProps={{ inputProps: { min: 0 } }}
+                                        id={"txtEmpUsername"}
                                     />
                                     <TextField
                                         className={field}
@@ -210,6 +214,7 @@ export const AddEmployee = () => {
                                         error={!!formErrors.password}
                                         helperText={formErrors.password}
                                         InputProps={{ inputProps: { min: 0.00, step: 0.01 } }}
+                                        id={"txtEmpPassword"}
                                     />
                                 </Grid>
                             </Grid>
@@ -220,6 +225,7 @@ export const AddEmployee = () => {
                                     type="button"
                                     className={submitButton}
                                     onClick={handleSubmit}
+                                    id={"btnAddEmp"}
                                 >
                                     Submit
                                 </Button>

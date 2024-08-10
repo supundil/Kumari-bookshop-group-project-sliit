@@ -100,7 +100,7 @@ export const AdminHome = () => {
                         <Tab id={"orders"} label="Orders" onClick={() => navigate('/adm/order')} />
                         <Tab label="Customers" onClick={() => navigate('/adm/customer')} />
                         <Tab label="Employees" onClick={() => navigate('/adm/employee')} />
-                        <Tab label="Add Employee" onClick={() => navigate('/adm/addEmployee')} />
+                        <Tab id={"addEmployee"} label="Add Employee" onClick={() => navigate('/adm/addEmployee')} />
                     </Tabs>
                     <div>
                         <IconButton color="inherit" onClick={logout}>
