@@ -1,5 +1,5 @@
 describe('Sign Up Function', () => {
-    it('successfully loads', () => {
+    it('Test Case Passed', () => {
         cy.visit('http://localhost:3000')
         cy.contains("Don't have an account? SignUp now").click()
 

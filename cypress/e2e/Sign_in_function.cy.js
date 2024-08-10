@@ -1,5 +1,5 @@
 describe('Sign In Function', () => {
-    it('successfully loads', () => {
+    it('Test Case Passed', () => {
         cy.visit('http://localhost:3000')
 
         cy.wait(1000)

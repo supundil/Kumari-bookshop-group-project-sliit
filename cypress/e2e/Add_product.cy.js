@@ -1,5 +1,5 @@
 describe('Admin Product Details Update', () => {
-    it('successfully loads', () => {
+    it('Test Case Passed', () => {
         cy.visit('http://localhost:3000')
         cy.get('input[name="username"]').type('admin123')
         cy.get('input[name="password"]').type('admin123')
