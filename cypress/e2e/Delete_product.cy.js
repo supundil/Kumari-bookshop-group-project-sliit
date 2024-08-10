@@ -19,12 +19,13 @@ describe('Admin Product Details Update', () => {
 
         cy.get('#DeleteProduct').click()
 
+        cy.intercept('DELETE', 'http://localhost:8080/api/v1/product/delete-product/*').as('deleteProductRequest');
         cy.wait(500)
-
-
         cy.get('#DeleteModalOk').click()
 
-
+        cy.wait('@deleteProductRequest').then((interception) => {
+            expect(interception.response.statusCode).to.equal(200);
+        });
 
     })
 })

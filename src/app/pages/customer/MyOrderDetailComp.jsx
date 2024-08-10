@@ -54,11 +54,8 @@ export default function MyOrderDetailComp() {
 
 
     const fetchData = () => {
-        console.log("Fetching data every 15 seconds");
-        const username = sessionStorage.getItem('username'); // Assuming username is stored in sessionStorage
-
-        if (username) {
-            const url = `http://localhost:8080/api/v1/order-service/get-bill/${username}`;
+        if (authDto.username) {
+            const url = `http://localhost:8080/api/v1/order-service/get-bill/${authDto.username}`;
 
             fetch(url, {
                 method: 'POST',
@@ -160,7 +157,7 @@ export default function MyOrderDetailComp() {
                                 fontWeight: 'bold'
                             }}>Sum</Typography></TableCell>
                         </TableRow>
-                        {orderDetailDtoList.map(({detailId, productName, quantity, sellingPrice, totalPrice}) => (
+                        {orderDetailDtoList && orderDetailDtoList.map(({detailId, productName, quantity, sellingPrice, totalPrice}) => (
                             <TableRow key={detailId}>
                                 <TableCell>{productName}</TableCell>
                                 <TableCell align="right">{quantity}</TableCell>
@@ -195,7 +192,7 @@ export default function MyOrderDetailComp() {
                           style={{textAlign: 'end', paddingRight: '12px'}}>
 
                     </Grid>
-                    <Grid xs={3}  style={{display: 'flex'}}>
+                    {orderStatus === "CONFIRMED" && <Grid xs={3} style={{display: 'flex'}}>
                         <Button id={"downloadBill"} variant="contained"
                                 color="primary"
                                 type="button"
@@ -205,7 +202,7 @@ export default function MyOrderDetailComp() {
                         >
                             Download Bill
                         </Button>
-                    </Grid>
+                    </Grid>}
                 </Grid>
             </Paper>))
     }

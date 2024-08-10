@@ -17,7 +17,13 @@ describe('Customer Place Order', () => {
 
         cy.wait(1000)
 
+        cy.intercept('POST', 'http://localhost:8080/api/v1/order-service/place-order/*').as('placeOrderRequest');
+        cy.wait(500)
         cy.get('#placeOrder').click()
+
+        cy.wait('@placeOrderRequest').then((interception) => {
+            expect(interception.response.statusCode).to.equal(200);
+        });
 
     })
 })

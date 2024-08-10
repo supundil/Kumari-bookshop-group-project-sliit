@@ -35,9 +35,14 @@ describe('Admin Delete Product', () => {
         cy.get('input[name="buyingPrice"]').type('admin123')
         cy.get('input[name="sellingPrice"]').type('admin123')
 
-        cy.wait(1000)
+        cy.wait(500)
 
+        cy.intercept('POST', 'http://localhost:8080/api/v1/product/update').as('updateProductRequest');
+        cy.wait(500)
         cy.get('#updateProduct').click()
 
+        cy.wait('@updateProductRequest').then((interception) => {
+            expect(interception.response.statusCode).to.equal(200);
+        });
     })
 })

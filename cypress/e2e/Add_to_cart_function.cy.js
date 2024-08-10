@@ -13,7 +13,22 @@ describe('Add to Cart Function', () => {
                     .click()
             })
 
-        cy.get('input[name="quantity"]').type('1')
+        cy.wait(1000)
+
+        cy.get('input[name="quantity"]').type('0')
+        cy.contains('Add to Cart').click()
+        cy.get('input[name="quantity"]').clear()
+
+        cy.wait(2000)
+
+
+        cy.get('input[name="quantity"]').type('110')
+        cy.contains('Add to Cart').click()
+
+        cy.wait(2000)
+
+        cy.get('input[name="quantity"]').clear()
+        cy.get('input[name="quantity"]').type('2')
         cy.contains('Add to Cart').click()
         cy.wait(1000)
 
@@ -21,25 +36,17 @@ describe('Add to Cart Function', () => {
             .should('exist')
             .and('be.visible')
         cy.wait(500)
+
+        cy.intercept('POST', 'http://localhost:8080/api/v1/order-service/add-to-cart').as('addToCartRequest');
+        cy.wait(500)
         // Click the 'Add' button in the dialog
         cy.get('button')
             .contains('Add')
             .click()
 
-
-        cy.wait(5000)
-
-
-        cy.get('input[name="quantity"]').type('0')
-        cy.contains('Add to Cart').click()
-        cy.get('input[name="quantity"]').clear()
-        cy.wait(1000)
-
-
-        cy.get('input[name="quantity"]').type('110')
-        cy.contains('Add to Cart').click()
-        cy.wait(500)
-
+        cy.wait('@addToCartRequest').then((interception) => {
+            expect(interception.response.statusCode).to.equal(200);
+        });
 
     })
 })
