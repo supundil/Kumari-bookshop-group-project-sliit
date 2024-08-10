@@ -143,17 +143,17 @@ export const OrderDetail = () => {
                             textColor="inherit"
                             centered
                         >
-                            <Tab label="Submitted" style={{color: '#373738', fontWeight: 'bold'}}/>
-                            <Tab label="Confirmed" style={{color: '#373738', fontWeight: 'bold'}}/>
-                            <Tab label="Paid" style={{color: '#373738', fontWeight: 'bold'}}/>
-                            <Tab label="Rejected" style={{color: '#373738', fontWeight: 'bold'}}/>
+                            <Tab id={"submittedOrders"} label="Submitted" style={{color: '#373738', fontWeight: 'bold'}}/>
+                            <Tab id={"confirmedOrders"} label="Confirmed" style={{color: '#373738', fontWeight: 'bold'}}/>
+                            <Tab id={"paidOrders"} label="Paid" style={{color: '#373738', fontWeight: 'bold'}}/>
+                            <Tab id={"rejectedOrders"} label="Rejected" style={{color: '#373738', fontWeight: 'bold'}}/>
                         </Tabs>
                     </Paper>
                 </Grid>
                 <Grid item xs={12} style={{marginBottom: '12px'}}>
                     <Divider variant="fullWidth"/>
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} id={"orderContainer"}>
                     <OrderTableComp
                         orderList={orderWrapper}
                         status={status}

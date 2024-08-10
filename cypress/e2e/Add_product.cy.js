@@ -10,14 +10,14 @@ describe('Admin Product Details Update', () => {
 
         cy.wait(1000)
 
-        cy.get('input[name="code"]').type('admin123')
-        cy.get('input[name="name"]').type('admin123')
-        cy.get('textarea[name="description"]').type('admin123')
-        cy.get('input[name="quantity"]').type('admin123')
+        cy.get('input[name="code"]').type('P100')
+        cy.get('input[name="name"]').type('Atlas Pink Pen')
+        cy.get('textarea[name="description"]').type('Atlas Pink Pen')
+        cy.get('input[name="quantity"]').type('200')
         cy.get('#category').click()
         cy.get('li').contains('School Supplies').click()
-        cy.get('input[name="buyingPrice"]').type('admin123')
-        cy.get('input[name="sellingPrice"]').type('admin123')
+        cy.get('input[name="buyingPrice"]').type('16')
+        cy.get('input[name="sellingPrice"]').type('20')
 
         cy.get('input[type="file"]').then(input => {
             input.removeAttr('hidden');

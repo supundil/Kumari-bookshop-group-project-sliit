@@ -123,6 +123,7 @@ export const Cart = () => {
         orderService.placeOrder(authDto.username).then((res) => {
             if (200 === res.status) {
                 setLoading(false);
+                enqueueSnackbar('Order Placed Successfully', {variant: 'success'});
                 getCart();
             } else {
                 setLoading(false);

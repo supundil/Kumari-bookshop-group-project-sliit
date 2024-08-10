@@ -9,11 +9,11 @@ describe('Customer Place Order', () => {
 
         cy.get('#cart').click()
 
-        cy.get('#decreaseItems').first().click()
+        cy.get('#increaseItems').first().click()
 
         cy.wait(1000)
 
-        cy.get('#increaseItems').first().click()
+        cy.get('#decreaseItems').first().click()
 
         cy.wait(1000)
 

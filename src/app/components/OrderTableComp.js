@@ -227,6 +227,7 @@ const OrderTableComp = ({orderList, status, setLoading, getAllSubmittedOrders, g
                                           type="button"
                                           className={updateButton}
                                           onClick={() => rejectOrder(oderId)}
+                                          id={"rejectBtn"}
                             >
                                 Reject
                             </StyledButton>
@@ -240,6 +241,7 @@ const OrderTableComp = ({orderList, status, setLoading, getAllSubmittedOrders, g
                                     style={{backgroundColor: '#56fc03'}}
                                     className={updateButton}
                                     onClick={() => confirmOrder(oderId)}
+                                    id={"confirmBtn"}
                             >
                                 Confirm
                             </Button>
@@ -251,6 +253,7 @@ const OrderTableComp = ({orderList, status, setLoading, getAllSubmittedOrders, g
                                     style={{backgroundColor: '#991f00'}}
                                     className={updateButton}
                                     onClick={() => paidOrder(oderId)}
+                                    id={"confirmPaymentBtn"}
                             >
                                 Confirm Payment
                             </Button>
