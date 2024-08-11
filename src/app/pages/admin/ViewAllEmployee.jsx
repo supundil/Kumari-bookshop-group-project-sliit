@@ -42,6 +42,7 @@ const Row = ({ row }) => {
             <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
                 <TableCell>
                     <IconButton
+                        id={"collapseOpen"}
                         aria-label="expand row"
                         size="small"
                         onClick={() => setOpen(!open)}
@@ -89,7 +90,7 @@ const Row = ({ row }) => {
                                             <Grid container spacing={2}>
                                                 <Grid item xs={12}>
                                                     <Box sx={{ display: 'flex', gap: 2, alignItems: "right" }}>
-                                                        <Button type="button" onClick={handleEdit} variant="contained" color="primary" startIcon={<EditIcon />}>
+                                                        <Button id={"editEmployee"} type="button" onClick={handleEdit} variant="contained" color="primary" startIcon={<EditIcon />}>
                                                             Edit
                                                         </Button>
                                                     </Box>

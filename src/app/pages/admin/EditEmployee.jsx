@@ -168,6 +168,7 @@ export const UpdateEmployee = () => {
                                         multiline
                                         size="small"
                                         name="name"
+                                        id={"employeeName"}
                                         value={formValues.name}
                                         onChange={handleInputChange}
                                         error={!!formErrors.name}
@@ -183,6 +184,7 @@ export const UpdateEmployee = () => {
                                         fullWidth
                                         size="small"
                                         name="address"
+                                        id={"employeeAddress"}
                                         value={formValues.address}
                                         onChange={handleInputChange}
                                         error={!!formErrors.address}
@@ -198,6 +200,7 @@ export const UpdateEmployee = () => {
                                         fullWidth
                                         size="small"
                                         name="nic"
+                                        id={"employeeNic"}
                                         value={formValues.nic}
                                         onChange={handleInputChange}
                                         error={!!formErrors.nic}
@@ -214,6 +217,7 @@ export const UpdateEmployee = () => {
                                         fullWidth
                                         size="small"
                                         name="userName"
+                                        id={"employeeUsername"}
                                         value={formValues.userName}
                                         onChange={handleInputChange}
                                         error={!!formErrors.userName}
@@ -228,6 +232,7 @@ export const UpdateEmployee = () => {
                                         fullWidth
                                         size="small"
                                         name="password"
+                                        id={"employeePassword"}
                                         value={formValues.password}
                                         onChange={handleInputChange}
                                         error={!!formErrors.password}
@@ -238,6 +243,7 @@ export const UpdateEmployee = () => {
                             </Grid>
                             <Grid item xs={12} className={submitButtonContainer}>
                                 <Button
+                                    id={"editEmployeeSubmit"}
                                     variant="contained"
                                     color="primary"
                                     type="button"

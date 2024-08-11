@@ -17,12 +17,13 @@ describe('Add to Cart Function', () => {
 
         cy.get('input[name="quantity"]').type('0')
         cy.contains('Add to Cart').click()
+        cy.wait(500)
         cy.get('input[name="quantity"]').clear()
 
         cy.wait(2000)
 
 
-        cy.get('input[name="quantity"]').type('110')
+        cy.get('input[name="quantity"]').type('10000')
         cy.contains('Add to Cart').click()
 
         cy.wait(2000)
