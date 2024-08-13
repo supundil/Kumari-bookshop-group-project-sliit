@@ -72,7 +72,9 @@ export const AddEmployee = () => {
         setLoading(true);
         if (validateForm()) {
                 console.log(formValues)
-                employeeService.save(formValues).then((res) => {
+            const formData = new FormData();
+            formData.append('adminDto', JSON.stringify(formValues));
+                employeeService.save(formData).then((res) => {
                     if (200 === res.status) {
                         enqueueSnackbar('Successfully Saved', {variant: 'success'});
                         setFormValues({
