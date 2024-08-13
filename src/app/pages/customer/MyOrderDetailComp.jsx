@@ -75,7 +75,7 @@ export default function MyOrderDetailComp() {
                     const url = window.URL.createObjectURL(blob);
                     const link = document.createElement('a');
                     link.href = url;
-                    link.setAttribute('download', `Invoice_${username}.pdf`); // Set filename for download
+                    link.setAttribute('download', `Invoice_${authDto.username}.pdf`); // Set filename for download
                     document.body.appendChild(link);
                     link.click();
                     link.remove();
