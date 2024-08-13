@@ -54,8 +54,9 @@ export default function MyOrderDetailComp() {
 
 
     const fetchData = () => {
-        if (authDto.username) {
-            const url = `http://localhost:8080/api/v1/order-service/get-bill/${authDto.username}`;
+        let oderId = {orderWrapper};
+        if (oderId) {
+            const url = `http://localhost:8080/api/v1/order-service/get-bill/${oderId}`;
 
             fetch(url, {
                 method: 'POST',
@@ -75,7 +76,7 @@ export default function MyOrderDetailComp() {
                     const url = window.URL.createObjectURL(blob);
                     const link = document.createElement('a');
                     link.href = url;
-                    link.setAttribute('download', `Invoice_${authDto.username}.pdf`); // Set filename for download
+                    link.setAttribute('download', `Invoice_${authDto.username}_${oderId}.pdf`); // Set filename for download
                     document.body.appendChild(link);
                     link.click();
                     link.remove();
@@ -104,7 +105,7 @@ export default function MyOrderDetailComp() {
     }
 
     const getOrderList = () => {
-        return orderWrapper.map(({orderStatus, createdDate, orderDetailDtoList, totalCost, oderId}) => (
+        return map(({orderStatus, createdDate, orderDetailDtoList, totalCost, oderId}) => (
             <Paper variant="outlined" key={"cusOrder"+oderId+totalCost} style={{marginBottom: '16px'}}>
                 <Table sx={{minWidth: 700}} aria-label="spanning table">
                     <TableBody>
@@ -212,7 +213,7 @@ export default function MyOrderDetailComp() {
             <Backdrop className={backdrop} open={loading}>
                 <CircularProgress color="inherit"/>
             </Backdrop>
-            {orderWrapper.length
+            {length
                 ? getOrderList()
                 : <div className={emptyCartMessage}>No orders, keep browsing.</div>}
         </>
