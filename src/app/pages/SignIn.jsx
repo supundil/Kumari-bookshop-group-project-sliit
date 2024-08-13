@@ -8,7 +8,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import {useNavigate} from "react-router-dom";
 import logo from '../../asset/img/logo2.png'
-import book from '../../asset/img/bookshop.jpg'
+import book from '../../asset/img/bookshop.jpeg'
 import {Copyright} from "../components/Copyright";
 import {backdropStyles, textFieldStyles, useStyles} from "../util/CommonStyles";
 import {Backdrop, CircularProgress, IconButton, InputAdornment, TextField} from "@material-ui/core";
