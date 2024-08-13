@@ -105,7 +105,7 @@ export default function MyOrderDetailComp() {
     }
 
     const getOrderList = () => {
-        return map(({orderStatus, createdDate, orderDetailDtoList, totalCost, oderId}) => (
+        return orderWrapper.map(({orderStatus, createdDate, orderDetailDtoList, totalCost, oderId}) => (
             <Paper variant="outlined" key={"cusOrder"+oderId+totalCost} style={{marginBottom: '16px'}}>
                 <Table sx={{minWidth: 700}} aria-label="spanning table">
                     <TableBody>
