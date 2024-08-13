@@ -1,4 +1,4 @@
-describe('Admin Delete Product', () => {
+describe('Update Product Details', () => {
     it('Test Case Passed', () => {
         cy.visit('http://localhost:3000')
         cy.get('input[name="username"]').type('admin123')
@@ -26,14 +26,14 @@ describe('Admin Delete Product', () => {
 
         cy.wait(1000)
 
-        cy.get('input[name="code"]').type('admin123')
-        cy.get('input[name="name"]').type('admin123')
-        cy.get('textarea[name="description"]').type('admin123')
-        cy.get('input[name="quantity"]').type('admin123')
+        cy.get('input[name="code"]').type('P003')
+        cy.get('input[name="name"]').type('ATLAS A4 BOOK CR 80PGS SINGLE RULED')
+        cy.get('textarea[name="description"]').type('ATLAS A4 BOOK CR 80PGS SINGLE RULED')
+        cy.get('input[name="quantity"]').type('123')
         cy.get('#categorySelect').click()
         cy.get('li').contains('School Supplies').click()
-        cy.get('input[name="buyingPrice"]').type('admin123')
-        cy.get('input[name="sellingPrice"]').type('admin123')
+        cy.get('input[name="buyingPrice"]').type('195')
+        cy.get('input[name="sellingPrice"]').type('200')
 
         cy.wait(500)
 
