@@ -53,8 +53,7 @@ export default function MyOrderDetailComp() {
     }
 
 
-    const fetchData = () => {
-        let oderId = {orderWrapper};
+    const fetchData = (oderId) => {
         if (oderId) {
             const url = `http://localhost:8080/api/v1/order-service/get-bill/${oderId}`;
 
@@ -199,7 +198,7 @@ export default function MyOrderDetailComp() {
                                 type="button"
                                 style={{backgroundColor: '#03c2fc'}}
                                 className={updateButton}
-                                onClick={fetchData}
+                                onClick={() => fetchData(oderId)}
                         >
                             Download Bill
                         </Button>
@@ -213,7 +212,7 @@ export default function MyOrderDetailComp() {
             <Backdrop className={backdrop} open={loading}>
                 <CircularProgress color="inherit"/>
             </Backdrop>
-            {length
+            {orderWrapper.length
                 ? getOrderList()
                 : <div className={emptyCartMessage}>No orders, keep browsing.</div>}
         </>
