@@ -1,5 +1,5 @@
 const CartIcon = require("@material-ui/icons/ShoppingCart");
-describe('Customer Place Order', () => {
+describe('Customer Download Order Bill', () => {
     it('Test Case Passed', () => {
         cy.visit('http://localhost:3000')
         cy.get('input[name="username"]').type('thathsara1')

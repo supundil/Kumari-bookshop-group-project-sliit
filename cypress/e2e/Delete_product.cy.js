@@ -1,4 +1,4 @@
-describe('Admin Product Details Update', () => {
+describe('Admin Delete Product', () => {
     it('Test Case Passed', () => {
         cy.visit('http://localhost:3000')
         cy.get('input[name="username"]').type('admin123')
